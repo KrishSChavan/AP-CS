@@ -1,79 +1,110 @@
 import javax.swing.*;
 import BreezySwing.*;
 
-public class Main extends GBFrame{
+public class Main extends GBFrame {
 
-	// Initializing different parts of the GUI
-	
-	JLabel Numerator1 				= addLabel ("Numerator 1:", 	1,1,1,1);
-	IntegerField numerator1Field	= addIntegerField (1,           1,2,1,1);
-	JLabel Denominator1 			= addLabel ("Denominator 1:", 	2,1,1,1);
-	IntegerField denominator1Field	= addIntegerField (1,           2,2,1,1);
-	
-	JLabel Numerator2 				= addLabel ("Numerator 2:", 	3,1,1,1);
-	IntegerField numerator2Field	= addIntegerField (1,           3,2,1,1);
-	JLabel Denominator2 			= addLabel ("Denominator 2:", 	4,1,1,1);
-	IntegerField denominator2Field	= addIntegerField (1,           4,2,1,1);
-	
-	JButton calculateButton         = addButton ("Multiply",        5,2,1,1);
-	
-	JTextField answerfield	= addTextField ("Enter 2 fractions above",    6,2,1,1);
-	JLabel answerlabel 		= addLabel ("Answer:", 						  6,1,1,1);
+    JLabel startingLabel = addLabel ("Pick the size of your square", 1,1,1,1);
 
-	MyClass myClass = new MyClass();
-	
-	
-	// sets the answer field to an error message to the user
-	private void printErr(String errMessage) {
-		answerfield.setText(errMessage);
-	}
-	
-	public void buttonClicked(JButton buttonObj){
-    	
-        if (buttonObj == calculateButton){
-        	
-        	// set the two numerators and denominators
-        	myClass.setDenominators(denominator1Field.getNumber(), denominator2Field.getNumber());
-        	myClass.setNumerators(numerator1Field.getNumber(), numerator2Field.getNumber());
-        	
-        	   	      	
-        	// Error checking
-        	
-        	if (denominator1Field.getNumber() == 0 || denominator2Field.getNumber() == 0) {
-        		printErr("No 0 allowed in denominator");
-        	} else {
-        		if (denominator1Field.getNumber() == denominator2Field.getNumber() && numerator1Field.getNumber() == numerator2Field.getNumber()) {
-            		if (denominator1Field.getNumber() == numerator1Field.getNumber() && denominator2Field.getNumber() == numerator2Field.getNumber()) {
-            			printErr("1 / 1");        			
-            		}
-        	} else {
-        				
-    			myClass.GCF();
-    			
-        		if (myClass.finalDenominator == 1) {
-            		answerfield.setText(myClass.finalNumerator + "");
-            	} else {
-            		if (myClass.finalNumerator < 0 && myClass.finalDenominator < 0) {
-            			answerfield.setText(Math.abs(myClass.finalNumerator) + " / " + Math.abs(myClass.finalDenominator));
-            		} else {
-            			answerfield.setText(myClass.finalNumerator + " / " + myClass.finalDenominator);
-            		}
-            	}
+    JButton size2Button = addButton ("2x2", 5,1,1,1);
+    JButton size4Button = addButton ("4x4", 4,1,1,1);
+    JButton size6Button = addButton ("6x6", 3,1,1,1);
+    JButton size8Button = addButton ("8x8", 2,1,1,1);
+    
+    
+    public int currentBoxSize = 0;
+    
+
+    public void buttonClicked(JButton buttonObj){
+
+        if (buttonObj == size2Button && currentBoxSize == 0) {
+ 
+        	for (int i = 1; i < 3; i++) {
+    			// rows
+        		for (int j = 1; j < 3; j++) {     			
+        			IntegerField field = addIntegerField (1, j+1,i+1,2,2);
+        			
+        			System.out.println("j: " + j);
+        			System.out.println("i: " + i);
+        		}
+        		
         	}
         	
-        }     
-       
+            currentBoxSize = 2;
+            size8Button.setVisible(false);
+            size6Button.setVisible(false);
+            size4Button.setVisible(false);
+            size2Button.setVisible(false);
+            startingLabel.setText("Please fill in the input fields");
+        } else if (buttonObj == size4Button && currentBoxSize == 0)  {
         	
+        	for (int i = 1; i < 5; i++) {
+    			// rows
+        		for (int j = 1; j < 5; j++) {     			
+        			IntegerField field = addIntegerField (1, j+1,i+1,2,2);
+        			
+        			System.out.println("j: " + j);
+        			System.out.println("i: " + i);
+        		}
+        		
+        	}
+        	
+            currentBoxSize = 4;
+            size8Button.setVisible(false);
+            size6Button.setVisible(false);
+            size4Button.setVisible(false);
+            size2Button.setVisible(false);
+            startingLabel.setText("Please fill in the input fields");
+        } else if (buttonObj == size6Button && currentBoxSize == 0) {
+        	
+        	for (int i = 1; i < 7; i++) {
+    			// rows
+        		for (int j = 1; j < 7; j++) {     			
+        			IntegerField field = addIntegerField (1, j+1,i+1,2,2);
+        			
+        			System.out.println("j: " + j);
+        			System.out.println("i: " + i);
+        		}
+        		
+        	}
+        	
+            currentBoxSize = 6;
+            size8Button.setVisible(false);
+            size6Button.setVisible(false);
+            size4Button.setVisible(false);
+            size2Button.setVisible(false);
+            startingLabel.setText("Please fill in the input fields");
+        } else if (buttonObj == size8Button && currentBoxSize == 0) {
+      	
+        	for (int i = 1; i < 9; i++) {
+    			// rows
+        		for (int j = 1; j < 9; j++) {     			
+        			IntegerField field = addIntegerField (1, j+1,i+1,2,2);
+        			
+        			System.out.println("j: " + j);
+        			System.out.println("i: " + i);
+        		}
+        		
+        	}
+        	
+            currentBoxSize = 8;
+            size8Button.setVisible(false);
+            size6Button.setVisible(false);
+            size4Button.setVisible(false);
+            size2Button.setVisible(false);
+            startingLabel.setText("Please fill in the input fields");
         }
-     
+    	
+        
+        
+
     }
-	
-	
-	// Creates GUI
-	public static void main(String[] args) {
-		JFrame frm = new Main();
-		frm.setTitle ("Fraction Calculator");
-		frm.setSize (500, 200);
-		frm.setVisible (true);
-	}
+
+
+    public static void main(String[] args) {
+        JFrame frm = new Main();
+        frm.setTitle ("Magic Square:Select size");
+        frm.setSize (500, 250);
+        frm.setVisible (true);
+    }
+
 }
