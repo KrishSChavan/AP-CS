@@ -1,6 +1,6 @@
-
-
 public class Checker {
+	
+	// initializes box size variable and array for this class
 	
 	private int boxSize;
 	private int checkerArray[][];
@@ -9,19 +9,24 @@ public class Checker {
 		boxSize = 0;
 	}
 	
+	// sets the magic square size
 	public void setMsSize(int msSize) {
 		boxSize = msSize;
 	}
 	
+	// sets checkerArray from main class
 	public void msAClass(int[][] msArrayClass) {
 		checkerArray = msArrayClass;
 	}
 
+	
+	// checks to see if it is a valid magic square
+	
 	public String getSquare() {
 		int finalSum = 0;
 		boolean isEqual = true;
 		
-		//rows
+		// checks the rows
 		for(int j=0; j<boxSize; j++) {
 			finalSum = finalSum + checkerArray[0][j];
 		}
@@ -39,7 +44,7 @@ public class Checker {
 			}
 			
 		
-		//columns
+		// checks the columns
 			for(int j = 0; j<boxSize; j++) {
 				
 				sum = 0;
@@ -53,7 +58,7 @@ public class Checker {
 				
 			}
 
-		//diagonals
+		// checks the diagonals
 			sum = 0;
 			for(int d = 0; d<boxSize; d++) {
 				sum = sum + checkerArray [d][d];
@@ -77,9 +82,9 @@ public class Checker {
 		}
 		String result = "";
 		if (isEqual == true) {
-			result = ("It is indeed a magic square");
+			result = ("IS a magic square!");
 		}else {
-			result = ("Sadly, this is not a magic square");
+			result = ("NOT a magic sqaure.");
 		}
 		return result;
 		
