@@ -18,7 +18,7 @@
 
 
 
-# How to make BreezySwing work...
+## How to make BreezySwing work...
 
 ### 1. Right click the project folder
 ### 2. Hover over build path
