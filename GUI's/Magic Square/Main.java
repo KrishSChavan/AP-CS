@@ -3,10 +3,12 @@ import BreezySwing.*;
 
 public class Main extends GBFrame {
 	
-	IntegerField[][] msArray = new IntegerField[8][8];
+	IntegerField[][] msArray = new IntegerField[8][8];   // Array that holds the values of all the inputs and their coordinates
 	
 	GBPanel msFields = addPanel(new GBPanel(), 1, 1, 1, 1);
 
+	// Initializing all the different elements
+	
 	JLabel startingLabel = addLabel ("Pick the size of your square", 1,1,1,1);
 	
     JButton size2Button = addButton ("2x2", 2,1,1,1);
@@ -19,14 +21,16 @@ public class Main extends GBFrame {
     
     JButton doneButton = addButton ("Done?", 11,3,1,1);
     
-    JTextField answerField = addTextField ("Answer", 20,3,7,7);
+    JTextField answerField = addTextField ("", 20,3,7,7);
     
-    int currentBoxSize = 0;
-    
-    boolean errorExists = false;
+    int currentBoxSize = 0; // Storing the box size
+   
+    boolean errorExists = false; // having a variable for errors to change/keep same after they click the submit button
     
     public void buttonClicked(JButton buttonObj){
 
+    	// Depending on the button clicked set the box size to the corresponding size and hide all other buttons, then use a nested for loop to generate all the input boxes and set them in the array
+    	
         if (buttonObj == size2Button) {
         	currentBoxSize = 2;
         	size2Button.setVisible(false);
@@ -44,7 +48,7 @@ public class Main extends GBFrame {
     			}
     		}
             
-            startingLabel.setText("Please fill in the input fields");
+            startingLabel.setText("Please fill in the input fields"); // set the label so it refreshes the page and loads the inputs
         } else if (buttonObj == size3Button)  {
             currentBoxSize = 3;
             size2Button.setVisible(false);
@@ -155,8 +159,13 @@ public class Main extends GBFrame {
             startingLabel.setText("Please fill in the input fields");
         } else if (buttonObj == doneButton) {
         	
+        	// set error to false to start
+        	
         	errorExists = false;
 			
+        	
+        	// Go through every input box and get its value and check to see that it is valid
+        	
 			//error check
 			for(int i = 0; i < currentBoxSize; i++) {
 				
@@ -176,7 +185,7 @@ public class Main extends GBFrame {
 			
 			
 			
-			//Magic square array to be used in the class
+			//Magic square array that wil then be used in the Checker.java class
 			int[][]msArrayChecker = new int[currentBoxSize][currentBoxSize];
 			
 			for(int i = 0; i < currentBoxSize; i++) {
@@ -185,7 +194,7 @@ public class Main extends GBFrame {
 				}
 			}
 			
-			// CLASS CODE
+			// initializes class if there is no error and calls setters and the main checking method
 			if (!errorExists) {
 				Checker myClass = new Checker();
 				
@@ -201,7 +210,8 @@ public class Main extends GBFrame {
 
     }
 
-
+    // Creates GUI
+    
     public static void main(String[] args) {
         JFrame frm = new Main();
         frm.setTitle ("Magic Square:Select size");
