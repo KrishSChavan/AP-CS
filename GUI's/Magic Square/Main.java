@@ -179,9 +179,9 @@ public class Main extends GBFrame {
 			//Magic square array to be used in the class
 			int[][]msArrayChecker = new int[currentBoxSize][currentBoxSize];
 			
-			for(int r = 0; r < currentBoxSize; r++) {
-				for(int c = 0; c < currentBoxSize; c++) {
-					msArrayChecker[r][c] = msArray[r][c].getNumber();
+			for(int i = 0; i < currentBoxSize; i++) {
+				for(int j = 0; j < currentBoxSize; j++) {
+					msArrayChecker[i][j] = msArray[i][j].getNumber();
 				}
 			}
 			
@@ -192,7 +192,7 @@ public class Main extends GBFrame {
 				myClass.setMsSize(currentBoxSize);
 				myClass.msAClass(msArrayChecker);
 
-				String Result = myClass.getMS();
+				String Result = myClass.getSquare();
 				answerField.setText(Result);
 			}
         	
