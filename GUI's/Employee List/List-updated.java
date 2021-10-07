@@ -26,20 +26,37 @@ class Checks {
 	private double highestTotalSalesNum;
 	private int highestTotalSalesIndex;
 	
-	public int getHighest(List[] employees, int count) {
+	private double lowestTotalSalesNum;
+	private int lowestTotalSalesIndex;
+	
+	public void setSales(List[] employees, int count) {
 		
 		for(int i = 0; i < count; i++){
 			if (employees[i].totalSales >= highestTotalSalesNum) {
 				highestTotalSalesNum = employees[i].totalSales;
 				highestTotalSalesIndex =  i;
+			} else if (employees[i].totalSales <= lowestTotalSalesNum) {
+				lowestTotalSalesNum = employees[i].totalSales;
+				lowestTotalSalesIndex =  i;
 			}
 		}
 		
 		System.out.println("Highest Total Sales: " + highestTotalSalesNum + ", by: " + employees[highestTotalSalesIndex].empName);
+		System.out.println("Lowest Total Sales: " + lowestTotalSalesNum + ", by: " + employees[lowestTotalSalesIndex].empName);
 
 		
-		return highestTotalSalesIndex;
+//		return highestTotalSalesIndex;
+//		return highestTotalSalesNum;
 		
+	}
+	
+	
+	public double getHighest() {
+		return highestTotalSalesNum;
+	}
+	
+	public double getLowest() {
+		return lowestTotalSalesNum;
 	}
 	
 }
