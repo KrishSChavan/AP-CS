@@ -1,6 +1,8 @@
 //     https://www.softwaretestinghelp.com/array-of-objects-in-java/
 
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import javax.swing.*;
 import BreezySwing.*;
 
@@ -8,22 +10,24 @@ public class EmployeeGUI extends GBFrame {
 
 	static JFrame frm;
 	
+	DecimalFormat df = new DecimalFormat("0.00");
+	
     List[] employees = new List[10];
 
     JLabel nameLabel = addLabel("Name 1 of 10: ", 1, 1, 1, 1);
     JTextField employeeName = addTextField ("", 1,2,1,1);
 
     JLabel q1Label = addLabel("Quarter 1 Sales: ", 2, 1, 1, 1);
-    DoubleField q1Sales = addDoubleField (0, 2,2,1,1);
+    DoubleField q1Sales = addDoubleField (0.00, 2,2,1,1);
 
     JLabel q2Label = addLabel("Quarter 2 Sales: ", 3, 1, 1, 1);
-    DoubleField q2Sales = addDoubleField (0, 3,2,1,1);
+    DoubleField q2Sales = addDoubleField (0.00, 3,2,1,1);
 
     JLabel q3Label = addLabel("Quarter 3 Sales: ", 4, 1, 1, 1);
-    DoubleField q3Sales = addDoubleField (0, 4,2,1,1);
+    DoubleField q3Sales = addDoubleField (0.00, 4,2,1,1);
 
     JLabel q4Label = addLabel("Quarter 4 Sales: ", 5, 1, 1, 1);
-    DoubleField q4Sales = addDoubleField (0, 5,2,1,1);
+    DoubleField q4Sales = addDoubleField (0.00, 5,2,1,1);
 
     JLabel blank = addLabel("", 6, 1, 1, 1);
 
@@ -42,6 +46,8 @@ public class EmployeeGUI extends GBFrame {
     JLabel allQ2;
     JLabel allQ3;
     JLabel allQ4;
+    JLabel totalSales;
+    JLabel highestSalesL;
     
     
     int nameCount = 0;
@@ -77,8 +83,10 @@ public class EmployeeGUI extends GBFrame {
     	allQ2 = addLabel("Q2", 1, 4, 1, 1);
     	allQ3 = addLabel("Q3", 1, 5, 1, 1);
     	allQ4 = addLabel("Q4", 1, 6, 1, 1);
+    	totalSales = addLabel("TOTAL SALES", 1, 7, 1, 1);
+    	highestSalesL = addLabel("HIGHEST SALES", 1, 8, 1, 1);
     	
-    	frm.setSize(500, 350);
+    	frm.setSize(550, 400);
     }
     
     
@@ -91,7 +99,7 @@ public class EmployeeGUI extends GBFrame {
     	
     	
     	
-    	employees[nameCount] = new List(employeeName.getText(), q1Sales.getNumber(), q2Sales.getNumber(), q3Sales.getNumber(), q4Sales.getNumber());
+    	employees[nameCount] = new List(employeeName.getText(), q1Sales.getNumber(), q2Sales.getNumber(), q3Sales.getNumber(), q4Sales.getNumber(), 0.0);
     	nameCount++;
     	
     	
@@ -110,12 +118,16 @@ public class EmployeeGUI extends GBFrame {
         	errLabel.setText("");
         	nameLabel.setText("Name " + (nameCount + 2) + " of 10:");
         	
-        	
             if (buttonObj == enterBtn) {
                 
             	saveName(employeeName.getText());
             	
+            	df.setRoundingMode(RoundingMode.UP);
+            	
+            	Checks checks = new Checks();
+            	
             	for (int i=0; i < nameCount; i++) {
+            		
             		
 //            		System.out.println();
 //                    System.out.println("EMPLOYEE #" + (i+1) + "   name: " + employees[i].empName + " q1: " + employees[i].q1Sales + " q2: " + employees[i].q2Sales + " q3: " + employees[i].q3Sales + " q4: " + employees[i].q4Sales);
@@ -124,13 +136,18 @@ public class EmployeeGUI extends GBFrame {
                     
             		JLabel numL = addLabel ("#" + (i+1), i+2, 1, 1, 1);
             		JLabel nameL = addLabel (employees[i].empName, i+2, 2, 1, 1);
-            		JLabel q1L = addLabel ("$" + employees[i].q1Sales, i+2, 3, 1, 1);
-            		JLabel q2L = addLabel ("$" + employees[i].q2Sales, i+2, 4, 1, 1);
-            		JLabel q3L = addLabel ("$" + employees[i].q3Sales, i+2, 5, 1, 1);
-            		JLabel q4L = addLabel ("$" + employees[i].q4Sales, i+2, 6, 1, 1);
+            		JLabel q1L = addLabel ("$" + df.format(employees[i].q1Sales), i+2, 3, 1, 1);
+            		JLabel q2L = addLabel ("$" + df.format(employees[i].q2Sales), i+2, 4, 1, 1);
+            		JLabel q3L = addLabel ("$" + df.format(employees[i].q3Sales), i+2, 5, 1, 1);
+            		JLabel q4L = addLabel ("$" + df.format(employees[i].q4Sales), i+2, 6, 1, 1);
+            		JLabel totalSales = addLabel ("$" + df.format(employees[i].totalSales), i+2, 7, 1, 1);
+            		if (employees[i].totalSales == employees[checks.getHighest(employees, nameCount)].totalSales) {
+            			JLabel highestSales = addLabel ("*", i+2, 8, 1, 1);
+            		} else {
+            			JLabel highestSales = addLabel ("", i+2, 8, 1, 1);
+            		}
             		
                 }
-            	
             	
             	
             	hideElements();
