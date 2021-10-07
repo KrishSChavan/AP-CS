@@ -48,6 +48,7 @@ public class EmployeeGUI extends GBFrame {
     JLabel allQ4;
     JLabel totalSales;
     JLabel highestSalesL;
+    JLabel LowestSalesL;
     
     
     int nameCount = 0;
@@ -84,7 +85,12 @@ public class EmployeeGUI extends GBFrame {
     	allQ3 = addLabel("Q3", 1, 5, 1, 1);
     	allQ4 = addLabel("Q4", 1, 6, 1, 1);
     	totalSales = addLabel("TOTAL SALES", 1, 7, 1, 1);
-    	highestSalesL = addLabel("HIGHEST SALES", 1, 8, 1, 1);
+    	
+    	if (nameCount > 1) {
+    		highestSalesL = addLabel("HIGHEST SALES", 1, 8, 1, 1);
+        	LowestSalesL = addLabel("LOWEST SALES", 1, 9, 1, 1);
+    	}
+    	
     	
     	frm.setSize(550, 400);
     }
@@ -125,6 +131,7 @@ public class EmployeeGUI extends GBFrame {
             	df.setRoundingMode(RoundingMode.UP);
             	
             	Checks checks = new Checks();
+            	checks.setSales(employees, nameCount);
             	
             	for (int i=0; i < nameCount; i++) {
             		
@@ -141,10 +148,16 @@ public class EmployeeGUI extends GBFrame {
             		JLabel q3L = addLabel ("$" + df.format(employees[i].q3Sales), i+2, 5, 1, 1);
             		JLabel q4L = addLabel ("$" + df.format(employees[i].q4Sales), i+2, 6, 1, 1);
             		JLabel totalSales = addLabel ("$" + df.format(employees[i].totalSales), i+2, 7, 1, 1);
-            		if (employees[i].totalSales == employees[checks.getHighest(employees, nameCount)].totalSales) {
-            			JLabel highestSales = addLabel ("*", i+2, 8, 1, 1);
+            		if (nameCount > 1 && employees[i].totalSales == checks.getHighest()) {
+            			JLabel highestSales = addLabel ("        *", i+2, 8, 1, 1);
             		} else {
             			JLabel highestSales = addLabel ("", i+2, 8, 1, 1);
+            		}
+            		
+            		if (nameCount > 1 && employees[i].totalSales == checks.getLowest()) {
+            			JLabel lowestSales = addLabel ("       *", i+2, 9, 1, 1);
+            		} else {
+            			JLabel lowestSales = addLabel ("", i+2, 9, 1, 1);
             		}
             		
                 }
