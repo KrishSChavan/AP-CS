@@ -1,12 +1,16 @@
+//     https://www.softwaretestinghelp.com/array-of-objects-in-java/
+
+
 import javax.swing.*;
 import BreezySwing.*;
 
 public class EmployeeGUI extends GBFrame {
 
-    String[] employeeNames = new String[10];
-    Double[] employeeSales = new Double[40];
+	static JFrame frm;
+	
+    List[] employees = new List[10];
 
-    JLabel nameLabel = addLabel("Name: ", 1, 1, 1, 1);
+    JLabel nameLabel = addLabel("Name 1 of 10: ", 1, 1, 1, 1);
     JTextField employeeName = addTextField ("", 1,2,1,1);
 
     JLabel q1Label = addLabel("Quarter 1 Sales: ", 2, 1, 1, 1);
@@ -28,12 +32,18 @@ public class EmployeeGUI extends GBFrame {
 
     JLabel blank2 = addLabel("", 8, 1, 1, 1);
     
-    JLabel countLabel = addLabel("", 9, 2, 1, 1);
-    
-    JLabel blank3 = addLabel("", 10, 1, 1, 1);
-    
-    JLabel errLabel = addLabel("", 11, 2, 1, 1);
+    JLabel errLabel = addLabel("", 9, 2, 1, 1);
 
+    
+    
+    
+    JLabel allNames;
+    JLabel allQ1;
+    JLabel allQ2;
+    JLabel allQ3;
+    JLabel allQ4;
+    
+    
     int nameCount = 0;
 
     public boolean fieldsFilled() {
@@ -61,6 +71,14 @@ public class EmployeeGUI extends GBFrame {
     	enterBtn.setVisible(false);
     	addEmployee.setVisible(false);
     	errLabel.setVisible(false);
+    	
+    	allNames = addLabel("NAMES", 1, 2, 1, 1);
+    	allQ1 = addLabel("Q1", 1, 3, 1, 1);
+    	allQ2 = addLabel("Q2", 1, 4, 1, 1);
+    	allQ3 = addLabel("Q3", 1, 5, 1, 1);
+    	allQ4 = addLabel("Q4", 1, 6, 1, 1);
+    	
+    	frm.setSize(500, 350);
     }
     
     
@@ -70,16 +88,10 @@ public class EmployeeGUI extends GBFrame {
     		addEmployee.setVisible(false);
     	}
     	
-    	Test t = new Test();
-    	List ans = t.getQs(q1Sales.getNumber(), q2Sales.getNumber(), q3Sales.getNumber(), q4Sales.getNumber());
-    	
-    	System.out.println("q1 " + ans.q1Sales);
-    	System.out.println("q2 " + ans.q2Sales);
-    	System.out.println("q3 " + ans.q3Sales);
-    	System.out.println("q4 " + ans.q4Sales);
     	
     	
-    	employeeNames[nameCount] = employeeName.getText();
+    	
+    	employees[nameCount] = new List(employeeName.getText(), q1Sales.getNumber(), q2Sales.getNumber(), q3Sales.getNumber(), q4Sales.getNumber());
     	nameCount++;
     	
     	
@@ -96,13 +108,27 @@ public class EmployeeGUI extends GBFrame {
 
         if (fieldsFilled()) {
         	errLabel.setText("");
-        	countLabel.setText((nameCount + 1) + " employees added, " + (10 - (nameCount + 1)) + " enteries left");
+        	nameLabel.setText("Name " + (nameCount + 2) + " of 10:");
+        	
+        	
             if (buttonObj == enterBtn) {
                 
             	saveName(employeeName.getText());
             	
-            	for (int i=0; i < employeeNames.length; i++) {
-                    System.out.println('\n' + employeeNames[i] + " #" + (i+1));
+            	for (int i=0; i < nameCount; i++) {
+            		
+//            		System.out.println();
+//                    System.out.println("EMPLOYEE #" + (i+1) + "   name: " + employees[i].empName + " q1: " + employees[i].q1Sales + " q2: " + employees[i].q2Sales + " q3: " + employees[i].q3Sales + " q4: " + employees[i].q4Sales);
+                    
+//                    JLabel aLabel = addLabel((i+1) + "   " + employees[i].empName + "     " + employees[i].q1Sales + "     " + employees[i].q2Sales + "     " + employees[i].q3Sales + "     " + employees[i].q4Sales, i+2, 1, 1, 1);
+                    
+            		JLabel numL = addLabel ("#" + (i+1), i+2, 1, 1, 1);
+            		JLabel nameL = addLabel (employees[i].empName, i+2, 2, 1, 1);
+            		JLabel q1L = addLabel ("$" + employees[i].q1Sales, i+2, 3, 1, 1);
+            		JLabel q2L = addLabel ("$" + employees[i].q2Sales, i+2, 4, 1, 1);
+            		JLabel q3L = addLabel ("$" + employees[i].q3Sales, i+2, 5, 1, 1);
+            		JLabel q4L = addLabel ("$" + employees[i].q4Sales, i+2, 6, 1, 1);
+            		
                 }
             	
             	
@@ -125,7 +151,7 @@ public class EmployeeGUI extends GBFrame {
 
 
     public static void main(String[] args) {
-        JFrame frm = new EmployeeGUI();
+        frm = new EmployeeGUI();
         frm.setTitle ("Employee Sales");
         frm.setSize (400, 250);
         frm.setVisible (true);
