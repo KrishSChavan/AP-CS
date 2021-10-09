@@ -96,19 +96,16 @@ class Checks {
 		
 		for(int i = 0; i < count; i++){
 			
+			highestTotalSalesNum = employees[0].totalSales;
+			lowestTotalSalesNum = employees[0].totalSales;
+			
 			if (employees[i].totalSales >= highestTotalSalesNum) {
 				highestTotalSalesNum = employees[i].totalSales;
-				System.out.println(employees[i].totalSales + "   " + employees[i].empName);
 				highestTotalSalesIndex =  i;
 			} else if (employees[i].totalSales <= lowestTotalSalesNum) {
 				lowestTotalSalesNum = employees[i].totalSales;
-				System.out.println(employees[i].totalSales + "   " + employees[i].empName);
 				lowestTotalSalesIndex =  i;
 			}
-			
-			
-//			System.out.println("Highest Total Sales: " + highestTotalSalesNum + ", by: " + employees[highestTotalSalesIndex].empName);
-//			System.out.println("Lowest Total Sales: " + lowestTotalSalesNum + ", by: " + employees[lowestTotalSalesIndex].empName);
 			
 		}
 		
