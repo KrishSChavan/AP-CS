@@ -111,12 +111,50 @@ class Checks {
 	}
 	
 	
+	
+	private double highestQuarterSalesNum;
+	private int highestQuarterSalesIndex;
+	
+	private double lowestQuarterSalesNum;
+	private int lowestQuarterSalesIndex;
+	
+	public void setQuarters(List [] employees, int count) {
+		
+		highestQuarterSalesNum = employees[0].highestQFinal;
+		lowestQuarterSalesNum = employees[0].lowestQFinal;
+		
+		for (int i = 0;  i < count; i++) {
+			
+			if (employees[i].highestQFinal >= highestQuarterSalesNum) {
+				highestQuarterSalesNum = employees[i].highestQFinal;
+				highestQuarterSalesIndex =  i;
+			} else if (employees[i].lowestQFinal <= lowestQuarterSalesNum) {
+				lowestQuarterSalesNum = employees[i].lowestQFinal;
+				lowestQuarterSalesIndex =  i;
+			}
+			
+		}
+		
+	}
+	
+	
+	
 	public double getHighest() {
 		return highestTotalSalesNum;
 	}
 	
 	public double getLowest() {
 		return lowestTotalSalesNum;
+	}
+	
+	
+	
+	public double getHighestQOverall() {
+		return highestQuarterSalesNum;
+	}
+	
+	public double getLowestQOverall() {
+		return lowestQuarterSalesNum;
 	}
 	
 	
