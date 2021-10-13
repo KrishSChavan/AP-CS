@@ -29,7 +29,7 @@ public class EmployeeGUI extends GBFrame {
     JLabel blank = addLabel("", 6, 1, 1, 1);
 
     JButton enterBtn = addButton ("Enter", 7,1,1,1);
-    JButton addEmployee = addButton ("Add Employee", 7,2,1,1);
+    JButton addEmployee = addButton ("Add New Employee", 7,2,1,1);
 
     JLabel blank2 = addLabel("", 8, 1, 1, 1);
     
@@ -48,6 +48,8 @@ public class EmployeeGUI extends GBFrame {
     JLabel LowestSalesL;
     JLabel highestQL;
     JLabel lowestQL;
+    JLabel highestQOverallL;
+    JLabel lowestQOverallL;
     
     
     int nameCount = 0;
@@ -88,6 +90,9 @@ public class EmployeeGUI extends GBFrame {
     	if (nameCount > 1) {
     		highestSalesL = addLabel("HIGHEST SALES", 1, 8, 1, 1);
         	LowestSalesL = addLabel("LOWEST SALES", 1, 9, 1, 1);
+        	
+        	highestQOverallL = addLabel("HIGHEST QUARTER OVERALL", 1, 12, 1, 1);
+        	lowestQOverallL = addLabel("LOWEST QUARTER OVERALL", 1, 13, 1, 1);
     	}
     	
     	
@@ -135,6 +140,7 @@ public class EmployeeGUI extends GBFrame {
             	
             	Checks checks = new Checks();
             	checks.setSales(employees, nameCount);
+            	checks.setQuarters(employees, nameCount);
             	
             	for (int i=0; i < nameCount; i++) {
                     
@@ -146,18 +152,24 @@ public class EmployeeGUI extends GBFrame {
             		JLabel q4L = addLabel ("$" + df.format(employees[i].q4Sales), i+2, 6, 1, 1);
             		JLabel totalSales = addLabel ("$" + df.format(employees[i].totalSales), i+2, 7, 1, 1);
             		if (nameCount > 1 && employees[i].totalSales == checks.getHighest()) {
-            			JLabel highestSales = addLabel ("        *", i+2, 8, 1, 1);
+            			JLabel highestSales = addLabel ("         *", i+2, 8, 1, 1);
             		} else {
             			JLabel highestSales = addLabel ("", i+2, 8, 1, 1);
             		}
             		
             		if (nameCount > 1 && employees[i].totalSales == checks.getLowest()) {
-            			JLabel lowestSales = addLabel ("       *", i+2, 9, 1, 1);
+            			JLabel lowestSales = addLabel ("          *", i+2, 9, 1, 1);
             		} else {
             			JLabel lowestSales = addLabel ("", i+2, 9, 1, 1);
             		}
             		JLabel highestQSalesL = addLabel ("$" + df.format(employees[i].highestQFinal), i+2, 10, 1, 1);
             		JLabel lowestQSalesL = addLabel ("$" + df.format(employees[i].lowestQFinal), i+2, 11, 1, 1);
+            		if (nameCount > 1 && employees[i].highestQFinal == checks.getHighestQOverall()) {
+            			JLabel highestQOverallL2 = addLabel (employees[i].empName, i+2, 12, 1, 1);
+            		}
+            		if (nameCount > 1 && employees[i].lowestQFinal == checks.getLowestQOverall()) {
+            			JLabel lowestQOverallL2 = addLabel (employees[i].empName, i+2, 13, 1, 1);
+            		}
             		
             		
             		
