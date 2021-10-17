@@ -84,6 +84,7 @@ public class List {
 
 class Checks {
 	
+	
 	private double highestTotalSalesNum;
 	private int highestTotalSalesIndex;
 	
