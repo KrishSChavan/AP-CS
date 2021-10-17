@@ -34,6 +34,9 @@ public class EmployeeGUI extends GBFrame {
     JLabel blank2 = addLabel("", 8, 1, 1, 1);
     
     JLabel errLabel = addLabel("", 9, 2, 1, 1);
+    
+    JLabel errLabel2 = addLabel("", 30, 2, 1, 1);
+    
 
     
     
@@ -52,6 +55,19 @@ public class EmployeeGUI extends GBFrame {
     JLabel lowestQOverallL;
     
     
+    JMenuItem empMenu1 = addMenuItem ("Pick an Employee", "#1");
+    JMenuItem empMenu2 = addMenuItem ("Pick an Employee", "#2");
+    JMenuItem empMenu3 = addMenuItem ("Pick an Employee", "#3");
+    JMenuItem empMenu4 = addMenuItem ("Pick an Employee", "#4");
+    JMenuItem empMenu5 = addMenuItem ("Pick an Employee", "#5");
+    JMenuItem empMenu6 = addMenuItem ("Pick an Employee", "#6");
+    JMenuItem empMenu7 = addMenuItem ("Pick an Employee", "#7");
+    JMenuItem empMenu8 = addMenuItem ("Pick an Employee", "#8");
+    JMenuItem empMenu9 = addMenuItem ("Pick an Employee", "#9");
+    JMenuItem empMenu10 = addMenuItem ("Pick an Employee", "#10");
+    
+    
+    
     int nameCount = 0;
 
     public boolean fieldsFilled() {
@@ -64,7 +80,7 @@ public class EmployeeGUI extends GBFrame {
     }
 
     
-    public void hideElements() {
+    public void hideElements() {    	
     	nameLabel.setVisible(false);
     	employeeName.setVisible(false);
     	q1Label.setVisible(false);
@@ -99,8 +115,8 @@ public class EmployeeGUI extends GBFrame {
     	highestQL = addLabel("HIGHEST QUARTER", 1, 10, 1, 1);
     	lowestQL = addLabel("LOWEST QUARTER", 1, 11, 1, 1);
     	
-    	
     	frm.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    	
     }
     
     
@@ -115,8 +131,6 @@ public class EmployeeGUI extends GBFrame {
     	
     	employees[nameCount] = new List(employeeName.getText(), q1Sales.getNumber(), q2Sales.getNumber(), q3Sales.getNumber(), q4Sales.getNumber(), 0.0, 0.0, 0.0);
     	nameCount++;
-    	
-    	
     	
     	employeeName.setText("");
     	q1Sales.setNumber(0.0);
@@ -185,12 +199,192 @@ public class EmployeeGUI extends GBFrame {
             	saveName(employeeName.getText());
 
             }
+            
+            
         } else {
             errLabel.setText("Make sure to fill all the fields");
         }
 
     }
 
+    
+    
+    public void menuItemSelected(JMenuItem menuItem){
+        
+        if (menuItem == empMenu1) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 0) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 0);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu2) {
+//        	enterBtn.doClick();
+        	
+        	System.out.println(nameCount);
+        	
+        	if (nameCount == 1) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 1);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu3) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 2) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 2);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        
+        if (menuItem == empMenu4) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 3) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 3);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu5) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 4) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 4);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu6) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 5) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 5);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu7) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 6) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 6);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu8) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 7) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 7);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu9) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 8) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 8);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+        if (menuItem == empMenu10) {
+//        	enterBtn.doClick();
+        	
+        	if (nameCount == 9) {
+        		errLabel2.setText("Employee doesn't exist, pick a different employee");
+        	} else {
+//        		frm.setVisible(false);
+            	
+            	JFrame frm2 = new SingEmp(employees, 9);
+            	frm2.setTitle ("Single Employee");
+                frm2.setSize (400, 250);
+                frm2.setVisible (true);
+                frm2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        	}
+        	
+    	}
+        
+     }
 
 
 
