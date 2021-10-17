@@ -233,7 +233,7 @@ public class EmployeeGUI extends GBFrame {
         	
         	System.out.println(nameCount);
         	
-        	if (nameCount == 1) {
+        	if (nameCount < 1) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -250,7 +250,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu3) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 2) {
+        	if (nameCount < 2) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -268,7 +268,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu4) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 3) {
+        	if (nameCount < 3) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -285,7 +285,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu5) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 4) {
+        	if (nameCount < 4) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -302,7 +302,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu6) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 5) {
+        	if (nameCount < 5) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -319,7 +319,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu7) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 6) {
+        	if (nameCount < 6) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -336,7 +336,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu8) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 7) {
+        	if (nameCount < 7) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -353,7 +353,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu9) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 8) {
+        	if (nameCount < 8) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
@@ -370,7 +370,7 @@ public class EmployeeGUI extends GBFrame {
         if (menuItem == empMenu10) {
 //        	enterBtn.doClick();
         	
-        	if (nameCount == 9) {
+        	if (nameCount < 9) {
         		errLabel2.setText("Employee doesn't exist, pick a different employee");
         	} else {
 //        		frm.setVisible(false);
