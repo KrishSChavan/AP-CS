@@ -1,111 +1,189 @@
 import javax.swing.*;
 import BreezySwing.*;
 
-public class DecreasingSeq extends GBFrame {
-
-	static JFrame frm;
+public class DecreasingSeq extends GBFrame{
 	
-	int [] numbers = new int [25];
+	JButton startBtn = addButton("Let's get into it!", 1,5,1,1);
+	JLabel	messageBox = null;
+	JButton addAnotherBtn = null;
+	JButton calculateBtn = null;
+	JButton resetBtn = null;
+	IntegerField inputField = null;
+	GBPanel gridPanel = null;
 	
-	JLabel blank = addLabel("", 1, 1, 1, 1);
+		
+	int[]seq = new int[25];
+	int[][]Output;
+		
+	boolean TFSequence;
+	int s;
+	boolean validSize;
+	boolean allGood;
 	
-	JLabel numLabel = addLabel("Number 1 of 25: ", 2, 1, 1, 1);
-    IntegerField numField = addIntegerField (0, 2,2,1,1);
+	public void buttonClicked(JButton Button) {	
+		// Checking for the user to bootup the program
+		if(Button == startBtn) {
+			s = 0;
+			startBtn.setVisible(false);
+			gridPanel = addPanel(1,9,1,1);
+			inputField = gridPanel.addIntegerField(0, 1,5,2,2);
+			messageBox = gridPanel.addLabel("1 of 25", 1, 7, 1, 1);
+			addAnotherBtn	= gridPanel.addButton("Enter Number", 2,6,1,1);
+			resetBtn = gridPanel.addButton("Revert", 2,7,1,1);
+			calculateBtn = gridPanel.addButton("calculate", 2,8,1,1);
+			inputField.grabFocus();
+		}
+		
+		// adding the current number to an array
+		if(Button == addAnotherBtn) {
+			if(inputField.isValidNumber() == false) {
+				validSize = false;
+				messageBox.setVisible(true);
+				messageBox.setText("Please input a valid number");
+			}
+			else{
+				seq[s] = inputField.getNumber();
+				s++;
+				validSize = true;
+			}
+			if(validSize == true) {
+				messageBox.setVisible(true);
+				if (s < 25) {
+					messageBox.setText((s + 1) + " of 25");
+				} else {
+					messageBox.setText("MAX LIMIT REACHED");
+				}
+				inputField.setNumber(0);
+				inputField.grabFocus();
+			}
+		}
+		
+		// reseting everything back to the start
+		if(Button == resetBtn) {
+			for(int i = 0; i < s; i++) {
+				seq[i] = 0;
+			}
+			gridPanel.setVisible(false);
+			gridPanel.removeAll();
+			gridPanel.repaint();
+			startBtn.setVisible(true);
+		}
+		
+		
+		// finally calculating the longest non-decreasing sequence
+		if(Button == calculateBtn && validSize == true) {
+			Output = new int[12][s];
+			int []realSequence = new int [s];
+			for (int i = 0; i < s; i++) {
+				realSequence[i] = seq[i];
+			}
+			
+			
+			// making sure that the user has inputed correct amount of numbers
+			
+			allGood = true;
+			if(s < 2) {
+				allGood = false;
+				messageBox.setVisible(true);
+				messageBox.setText("2 or more numbers required");
+			}
+			
+			for(int i = 0; i < s ; i++) {
+			}
+			
+			// setting up a new row for each non-decreasing sequence
+			
+			if(allGood == true) {
+				
+				int pos = 0;
+				int RCount = 0;
 
-    JLabel blank2 = addLabel("", 3, 1, 1, 1);
-
-    JButton enterBtn = addButton ("Finished", 4,1,1,1);
-    JButton addNumber = addButton ("Add Another Number", 4,2,1,1);
-
-    JLabel blank3 = addLabel("", 5, 1, 1, 1);
-    
-    JLabel errLabel = addLabel("", 6, 2, 1, 1);
-    
-    JButton resetArr;
-    
-    int numCount = 0;
-    
-    public void saveNumber(int numb) {
-    	
-    	 if (resetArr == null) {
-    		 resetArr = addButton("Reset", 4,3,1,1);
-    	 } else {
-    		 resetArr.setVisible(true);
-    	 }
-    	
-    	if (numCount == 23) {
-    		addNumber.setVisible(false);
-    	}
-    	
-    	numbers[numCount] = numb;
-    	numCount++;
-    	
-    	numField.setNumber(0);
-    	numLabel.setText("Number " + (numCount + 1) + " out of 25: ");
-    }
-    
-    
-    
-    public void buttonClicked(JButton buttonObj){
-
-    	
-    	if (buttonObj == resetArr) {
-        	for (int i = 0; i<numbers.length; i++) {
-        		numbers[i] = 0;
-        	}
-        	numCount = 0;
-        	numLabel.setText("Number 1 of 25: ");
-        	resetArr.setVisible(false);
-        	errLabel.setText("");
-        	numField.setNumber(0);
-        } else {
-        	if (!numField.getText().isBlank()) {
-            	
-            	numField.grabFocus();
-            	
-            	if (buttonObj == enterBtn) {
-            		
-            		Calculations calculations = new Calculations();
-            		
-//            		numLabel.setVisible(false);
-//            	    numField.setVisible(false);
-//            	    blank2.setVisible(false);
-//            	    enterBtn.setVisible(false);
-//            	    addNumber.setVisible(false);
-//            	    blank3.setVisible(false);
-//            	    errLabel.setVisible(false);
-
-            		
-            		if (numbers != null) {
-            			saveNumber(numField.getNumber());
-            			calculations.calculate(numbers);
-            			for (int i=0; i<numbers.length; i++) {
-//            				System.out.println(i + " " + numbers[i]);
-                		}
-            		} else {
-            			System.out.println("Array is empty");
-            		}
-            		
-                } else if (buttonObj == addNumber) {
-                	saveNumber(numField.getNumber());
-                }
-            	
-            } else {
-            	errLabel.setText("Please enter a number.");
-            }
-        }
-    	
-
-    }
+				for (int r = 0; r <s/2; r++) {
+					int Counter = 0;
+					if(pos >= s-1) {
+						break;
+					}
+					for(int i = pos; i < s-1; i++) {
+						if (realSequence[i] <= realSequence[i+1]) {
+							Output[r][Counter] = realSequence[i];
+							Output[r][Counter+1] = realSequence[i+1];
+							Counter++;
+							if (i == s-2) {
+								pos = pos + s;
+								RCount++;
+							}
+						}else {
+							pos = i + 1;
+							RCount++;
+							break;
+						}
+					}
+				}
+	
+				// getting the longest sequence
+				
+				int[][]lndsResult = new int[RCount][s];
+				int LongestRow = 0;
+				for (int r = 0; r < RCount; r++) {
+					int NZCount = 0;
+					for(int i = 0; i < s; i++) {
+						if(Output[r][i] != 0) {
+							NZCount++;
+						}
+					}
+					if(LongestRow < NZCount){
+						LongestRow = NZCount;
+					}
+					for(int i = 0; i < NZCount; i++) {
+						lndsResult[r][i] = Output[r][i];
+						}
+					}
+				
+				TFSequence = true;
+				if (LongestRow < 2) {
+					TFSequence = false;
+					messageBox("There are no sequences present");
+				}
 
 
+				
+				// handling arrays with same length
+				
+				String [][]lndsOutput = new String [RCount][LongestRow];
+				if(TFSequence = true) {
+					for (int r = 0; r < RCount; r++) {
+						int NZCount = 0;
+						for(int i = 0; i < s; i++) {
+							if(Output[r][i] != 0) {
+								NZCount++;
+							}
+						}
+						if(LongestRow == NZCount) {
+							for(int I = 0; I < LongestRow; I++) {
+								lndsOutput[r][I] = lndsResult[r][I] + ", ";
+							}
+						}
+					}
+				}
+				String FOutputs = "";
+				for (int r = 0; r < RCount; r++) {
+					String AOutputs = "";
+					for (int i = 0; i < LongestRow; i++) {
+						AOutputs = (AOutputs + lndsOutput[r][i]);
+					}
+					FOutputs = (FOutputs + "Sequence " + r + ": " + AOutputs + " | ");
+				}
+				messageBox((FOutputs));
+			}
+		}
+	}
 
 
-    public static void main(String[] args) {
-        frm = new DecreasingSeq();
-        frm.setTitle ("Decreasing Sequence");
-        frm.setSize (400, 250);
-        frm.setVisible (true);
-    }
-
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JFrame frm = new DecreasingSeq();
+		frm.setTitle("Longest Non-Decreasing Sequence");
+		frm.setSize(400,200);
+		frm.setVisible(true);
+	}
 }
