@@ -1,7 +1,7 @@
 import javax.swing.*;
 import BreezySwing.*;
 
-public class DecreasingSeq extends GBFrame {
+public class Main extends GBFrame {
 
 	static JFrame frm;
 	
@@ -30,7 +30,7 @@ public class DecreasingSeq extends GBFrame {
     
 
     public static void main(String[] args) {
-        frm = new DecreasingSeq();
+        frm = new Main();
         frm.setTitle ("Decreasing Sequence");
         frm.setSize (400, 250);
         frm.setVisible (true);
