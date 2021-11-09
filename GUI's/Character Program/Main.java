@@ -1,7 +1,7 @@
 import javax.swing.*;
 import BreezySwing.*;
 
-public class Main extends GBFrame {
+public class DecreasingSeq extends GBFrame {
 
 	static JFrame frm;
 	
@@ -21,7 +21,8 @@ public class Main extends GBFrame {
     	
     	if (buttonObj == enterBtn) {
     		Counts counts = new Counts();
-    		counts.enter(textField.getText());
+    		counts.getSpaces(textField.getText());
+    		counts.getWords(textField.getText() + " ");
     	}
     	
     }
@@ -29,7 +30,7 @@ public class Main extends GBFrame {
     
 
     public static void main(String[] args) {
-        frm = new Main();
+        frm = new DecreasingSeq();
         frm.setTitle ("Decreasing Sequence");
         frm.setSize (400, 250);
         frm.setVisible (true);
