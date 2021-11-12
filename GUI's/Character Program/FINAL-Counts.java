@@ -27,7 +27,6 @@ public class Counts {
 	
 	public int storeWords(String text) {
 		
-		String word = "";
 		int wordCount = 0;
 		
 		if (text.trim() != "") {
@@ -44,6 +43,7 @@ public class Counts {
 			
 			int start = 0;
 			int end = 0;
+			String word = "";
 			
 			for (int o=0; o<CharArr.length; o++) {
 				
@@ -51,14 +51,18 @@ public class Counts {
 					start = o;
 					word = text.substring(start);
 				} else if (CharArr[o] == ' ') {
-					end = o;					
+					end = o;				
 					word = text.substring(start, end);
 					
-					if (!Character.isDigit(CharArr[end-1]) && !Character.isLetter(CharArr[end-1])) {
+					if (word.length() == 1) {
+						wordsArr[wordCount] = word;
+						wordCount++;
+						word = "";
+					} else if (!Character.isDigit(CharArr[end-1]) && !Character.isLetter(CharArr[end-1])) {
 						word = text.substring(start, end-1);
 					}
 					
-//					System.out.println("WORD: " + word);
+					System.out.println("WORD: " + word);
 					
 					if (wordCount > 0) {
 						
@@ -69,6 +73,7 @@ public class Counts {
 //								System.out.println("FOUND IT");
 								wordIsThere = true;
 								wordCountArr[i] = wordCountArr[i] + 1;
+								word = "";
 							} else {
 //								System.out.println("still looking..");
 							}
@@ -85,7 +90,7 @@ public class Counts {
 						word = "";
 					}
 					
-				}
+				} 
 				
 			}
 			
@@ -111,7 +116,7 @@ public class Counts {
 				}
 			}
 			if (wordsArr[n] != "") {
-				System.out.println(wordsArr[n] + " - " + wordCountArr[n]);
+				System.out.println(wordsArr[n].trim() + " - " + wordCountArr[n]);
 			}
 		}
 	}
@@ -119,3 +124,7 @@ public class Counts {
 
 	
 }
+
+
+
+// My words have many words in them
