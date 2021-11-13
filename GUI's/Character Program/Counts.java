@@ -1,5 +1,7 @@
 public class Counts {
 	
+	int rwc = 0;
+	
 	String[] wordsArr;
 	int[] wordCountArr;
 	
@@ -110,6 +112,18 @@ public class Counts {
 			
 		}
 		
+		for (int i = 0; i < text.length()-1; i++) {
+            if(text.charAt(i) != ' '  && text.charAt(i+1) == ' ') {
+            	rwc++;
+            }
+        }
+        if(text.charAt(text.length()-1) != ' ') {
+        	rwc++;
+        }
+		
+        
+        System.out.println("RWC: " + rwc);
+        
 		return wordCount;
 	}
 
