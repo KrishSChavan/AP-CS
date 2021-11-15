@@ -1,13 +1,17 @@
 public class Counts {
 	
-	int rwc = 0;
+	// Defining arrays and real word count variable
 	
+	int rwc = 0;
 	String[] wordsArr;
 	int[] wordCountArr;
-	
 	String[] finalOutput;
 	
-	public String getSpaces(String text) {
+	
+	
+	// Method to get all characters
+	
+	public String getChars(String text) {
 		
 		int spaces = 0;
 		String outputStr = "";
@@ -32,6 +36,9 @@ public class Counts {
 	}
 		
 	
+	
+	
+	// Finding and storing all the words
 	
 	public int storeWords(String text) {
 		
@@ -129,6 +136,9 @@ public class Counts {
 
 
 
+	
+	// Retrieving all the words and sending them all back to the GUI class
+	
 	public String[] printWords(int wordCount) {
 		System.out.println(wordCount + " words found:" + '\n');
 		
@@ -159,9 +169,3 @@ public class Counts {
 
 	
 }
-
-
-
-// My words have many words in them
-
-// hello there there .
