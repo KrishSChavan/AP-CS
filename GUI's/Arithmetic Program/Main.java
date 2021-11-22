@@ -35,7 +35,7 @@ public class Main extends GBFrame{
                 }
             }
 		//spaces in between numbers
-            char operand = ' ';
+			char operand = ' ';
 			int operandPos = 0;
 			String checks = "";
 			char mark = ' ';
@@ -98,8 +98,8 @@ public class Main extends GBFrame{
 				input = mark + first + operand + mark2 + second;
 			}
 			input = input.trim();
-			
-			
+
+
 			//class
 			if(allGood == true) {
 				input = input.trim();
