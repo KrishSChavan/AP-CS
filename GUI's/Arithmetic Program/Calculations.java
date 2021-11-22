@@ -31,7 +31,7 @@ public class Calculations {
 		}
 	}
 	
-	public String Caculate() {
+	public String calculate() {
 		String finalOutput = "";
 		try {
 				//addition
