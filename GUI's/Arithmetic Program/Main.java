@@ -107,7 +107,7 @@ public class Main extends GBFrame{
 				Calculate.setEquation(input);
 				Calculate.findOperand();
 				Calculate.findDigits();
-				messageBox(Calculate.Caculate());
+				messageBox(Calculate.calculate());
 			}
 		}
 	}
