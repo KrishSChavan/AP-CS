@@ -52,24 +52,24 @@ public class Calculations {
 				for(int i = GCF; i >= 1; i--){
 					if(numerator % i == 0 && denominator % i == 0) {
 						GCF = i;
-						numerator		= numerator/GCF;
-						denominator 	= denominator/GCF;
+						numerator = numerator/GCF;
+						denominator = denominator/GCF;
 					}
 				}
 				//Result
-				String mixed 		= "";
+				String mixed = "";
 				if(denominator < 0 && numerator < 0) {
-					denominator 	= Math.abs(denominator);
-					numerator 		= Math.abs(numerator); 
+					denominator = Math.abs(denominator);
+					numerator = Math.abs(numerator); 
 				}
-				int FrontMixed 		= numerator/denominator;
-				int RemainderMixed 	= numerator % denominator;
+				int FrontMixed = numerator/denominator;
+				int RemainderMixed = numerator % denominator;
 				if (numerator % denominator == 0) {
-					mixed 		= (FrontMixed + "");
+					mixed = (FrontMixed + "");
 				}else if (FrontMixed < 1){
-					mixed 		= (RemainderMixed + "/" + denominator);
+					mixed = (RemainderMixed + "/" + denominator);
 				}else{
-					mixed 		= (FrontMixed + ", " + RemainderMixed + "/" + denominator);
+					mixed = (FrontMixed + ", " + RemainderMixed + "/" + denominator);
 				}
 				finalOutput = mixed;
 			}
