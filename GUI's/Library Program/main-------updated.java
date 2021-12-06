@@ -41,7 +41,10 @@ public class Main extends GBFrame {
 //        	System.out.println(library);
         	
     	} else if (buttonObj == checkoutBook) {
-//    		CheckOut checkOut = new CheckOut(this, library);
+    		CheckOut checkOut = new CheckOut(this, library);
+    		
+    		checkOut.setVisible(true);
+    		
     	} else if (buttonObj == returnBook) {
     		
     	} else if (buttonObj == printAll) {
