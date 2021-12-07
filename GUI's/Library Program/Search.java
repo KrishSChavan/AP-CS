@@ -14,14 +14,16 @@ public class Search extends GBDialog {
 	
 	
 	private ArrayList<Library> library;
+	private JFrame frame;
 	
-	public Search(JFrame frame, ArrayList<Library> lib) {
-		super(frame);
+	public Search(JFrame frameMain, ArrayList<Library> lib) {
+		super(frameMain);
 		setTitle ("Search Book");
         setSize (350, 200);
         setDlgCloseIndicator ("CLOSE");
         
         this.library = lib;
+        this.frame = frameMain;
         
         combo.setVisible(false);
         select.setVisible(false);
@@ -38,7 +40,8 @@ public class Search extends GBDialog {
 				
 				combo.removeAllItems();
 				
-				for (int i=0; i<library.size(); i++) {					
+				for (int i=0; i<library.size(); i++) {
+					
 					if (((Library) library.get(i)).getTitle().equals(title.getText())) {
 						combo.addItem(((Library) library.get(i)).getTitle());
 					}
@@ -58,7 +61,20 @@ public class Search extends GBDialog {
 			
 		} else if (buttonObj == select) {
 			
-			System.out.println(combo.getSelectedItem());
+//			System.out.println(combo.getSelectedItem());
+			
+			for (int i=0; i<library.size(); i++) {
+				
+				if (((Library) library.get(i)).getTitle().equals(combo.getSelectedItem())) {		        	
+		        	dispose();
+		        	
+		        	Extra extra = new Extra(frame, library, i);
+		        	
+		        	extra.setVisible(true);
+		        	
+		        	return;
+				}
+			}
 			
 		}
 	}
