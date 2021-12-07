@@ -37,6 +37,7 @@ public class Main extends GBFrame {
 	Library lib2 = new Library("1", "1", "A", "02-02-2021");
 	Library lib3 = new Library("2", "2", "Smita", "03-03-2021");
 	Library lib4 = new Library("3", "3", "Sand", "04-04-2021");
+	Library nullBook = new Library("null!", "NULL!", null, null);
 	
 	boolean starterBookAdded = false;
 	
@@ -47,6 +48,7 @@ public class Main extends GBFrame {
     		library.add(lib2);
     		library.add(lib3);
     		library.add(lib4);
+    		library.add(nullBook);
     		header.setBackground(Color.pink);
     		starterBookAdded = true;
     	}
