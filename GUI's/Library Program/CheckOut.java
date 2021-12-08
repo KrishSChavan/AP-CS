@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
-
 import javax.swing.*;
 import BreezySwing.*;
 
 public class CheckOut extends GBDialog {
+	
+	private String dateFormat;
 	
 	JComboBox<String> combo = addComboBox (1,2,1,1);
 	
@@ -96,7 +99,15 @@ public class CheckOut extends GBDialog {
 						if (yearFld.getNumber() != 0) {
 							if ((yearFld.getNumber() + "").length() >= 4) {
 								
-								
+								try {
+									LocalDate.parse(yearFld.getNumber()+"-"+monthFld.getNumber()+"-"+dayFld.getNumber());
+								} catch (DateTimeParseException e) {
+									messageBox("Invalid date entered. Please try again.");
+									yearFld.setNumber(0);
+									monthFld.setNumber(0);
+									dayFld.setNumber(0);
+									return;
+								}
 								
 								System.out.println("Loaning- " + combo.getSelectedItem());
 								
