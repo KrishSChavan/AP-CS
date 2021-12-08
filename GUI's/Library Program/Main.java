@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -35,7 +37,6 @@ public class Main extends GBFrame {
 		header.setBackground(Color.pink);
 		header.setForeground(Color.white);
 		header.setFont (new Font ("Verdana", Font.BOLD, 24));
-		
 		
 		addBook.setBackground(Color.gray);
 		checkoutBook.setBackground(Color.gray);
@@ -85,7 +86,35 @@ public class Main extends GBFrame {
             messageBox(labelStr, 550, 350);
     		
     	} else if (buttonObj == printLate) {
-//    		PrintLate printLate = new PrintLate(library);
+    		
+    		
+    		String lateStr = "TITLE | BORROWER | # OF DAYS LATE" + '\n' + '\n';
+    		
+    		for (int i=0; i<library.size(); i++) {
+    			
+    			if (((Library) library.get(i)).getBorrower() != null) {
+    				String loanDate = ((Library) library.get(i)).getBorrowDate();
+    				
+    				String day = loanDate.substring(0, 2);
+    				String month = loanDate.substring(3, 5);
+    				String year = loanDate.substring(6);
+    				
+    				loanDate = year+"-"+month+"-"+day;
+    				
+    				LocalDate dateBefore = LocalDate.parse(loanDate);
+    				
+    				long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, LocalDate.now());
+    				
+    				if (noOfDaysBetween > 14) {
+    					lateStr += ((Library) library.get(i)).getTitle() + " | Borrowed by: " + ((Library) library.get(i)).getBorrower() + " | Days late: " + (noOfDaysBetween - 14) + '\n' + '\n';
+    				}
+    				
+    				
+    			}
+    			
+    		}
+    		
+    		messageBox(lateStr, 550, 350);
     		
     		
     	} else if (buttonObj == printBorrowed) {
@@ -96,11 +125,7 @@ public class Main extends GBFrame {
             		labelStr += i+1 + ". " + ((Library) library.get(i)).getTitle() + " | Borrowed by: " + ((Library) library.get(i)).getBorrower() + " | Borrowed on: " + ((Library) library.get(i)).getBorrowDate() + '\n' + '\n';
             	}
             }
-    		if (labelStr == " # | TITLE | BORROWER | DATE BORROWED" + '\n' + '\n') {
-    			labelStr = "No books borrowed.";
-    		}
-    		messageBox(labelStr, 550, 350);
-            
+            messageBox(labelStr, 550, 350);
     		
     	} else if (buttonObj == search) {
     		Search search = new Search(this, library);
