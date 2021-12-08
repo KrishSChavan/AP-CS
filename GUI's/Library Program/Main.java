@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -28,19 +29,34 @@ public class Main extends GBFrame {
 	
 	ArrayList<Library> library = new ArrayList<Library>();
 	
-	Library lib = new Library("First Book Author", "First Book Title", "K", "01-01-2021");
-//	Library lib2 = new Library("1", "1", "A", "02-02-2021");
-//	Library lib3 = new Library("2", "2", "Smita", "03-03-2021");
-//	Library lib4 = new Library("3", "3", "Sand", "04-04-2021");
-//	Library nullBook = new Library("null!", "NULL!", null, null);
+	Library lib = new Library("Dr. Seuss", "Cat In The Hat", null, null);
 	
 	public Main() {
 		header.setBackground(Color.pink);
+		header.setForeground(Color.white);
+		header.setFont (new Font ("Verdana", Font.BOLD, 24));
+		
+		
+		addBook.setBackground(Color.gray);
+		checkoutBook.setBackground(Color.gray);
+		returnBook.setBackground(Color.gray);
+		printAll.setBackground(Color.gray);
+		printLate.setBackground(Color.gray);
+		printBorrowed.setBackground(Color.gray);
+		search.setBackground(Color.gray);
+		printNumOfBooks.setBackground(Color.gray);
+		
+		addBook.setForeground(Color.white);
+		checkoutBook.setForeground(Color.white);
+		returnBook.setForeground(Color.white);
+		printAll.setForeground(Color.white);
+		printLate.setForeground(Color.white);
+		printBorrowed.setForeground(Color.white);
+		search.setForeground(Color.white);
+		printNumOfBooks.setForeground(Color.white);
+		
+		
 		library.add(lib);
-//		library.add(lib2);
-//		library.add(lib3);
-//		library.add(lib4);
-//		library.add(nullBook);
 	}
 	
     public void buttonClicked(JButton buttonObj) {
@@ -69,7 +85,7 @@ public class Main extends GBFrame {
             messageBox(labelStr, 550, 350);
     		
     	} else if (buttonObj == printLate) {
-    		PrintLate printLate = new PrintLate(library);
+//    		PrintLate printLate = new PrintLate(library);
     		
     		
     	} else if (buttonObj == printBorrowed) {
@@ -80,7 +96,11 @@ public class Main extends GBFrame {
             		labelStr += i+1 + ". " + ((Library) library.get(i)).getTitle() + " | Borrowed by: " + ((Library) library.get(i)).getBorrower() + " | Borrowed on: " + ((Library) library.get(i)).getBorrowDate() + '\n' + '\n';
             	}
             }
-            messageBox(labelStr, 550, 350);
+    		if (labelStr == " # | TITLE | BORROWER | DATE BORROWED" + '\n' + '\n') {
+    			labelStr = "No books borrowed.";
+    		}
+    		messageBox(labelStr, 550, 350);
+            
     		
     	} else if (buttonObj == search) {
     		Search search = new Search(this, library);
