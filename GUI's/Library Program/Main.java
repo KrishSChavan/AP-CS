@@ -9,10 +9,7 @@ public class Main extends GBFrame {
 	
 	// Defining parts of the frame
 	
-	
 	static JFrame frm;	
-	
-//	JLabel blank = addLabel("", 2, 1, 1, 1);
 	
 	
 	JButton addBook = addButton ("Add Book", 3,1,1,1);
@@ -26,32 +23,27 @@ public class Main extends GBFrame {
 	JButton header = addButton ("Krish's Library", 5, 2,1,1);
 	
 	JButton printNumOfBooks = addButton ("Print Library Count", 5,3,1,1);
-	
-	
     
     // Checking for button click
 	
 	ArrayList<Library> library = new ArrayList<Library>();
 	
 	Library lib = new Library("First Book Author", "First Book Title", "K", "01-01-2021");
-	Library lib2 = new Library("1", "1", "A", "02-02-2021");
-	Library lib3 = new Library("2", "2", "Smita", "03-03-2021");
-	Library lib4 = new Library("3", "3", "Sand", "04-04-2021");
-	Library nullBook = new Library("null!", "NULL!", null, null);
+//	Library lib2 = new Library("1", "1", "A", "02-02-2021");
+//	Library lib3 = new Library("2", "2", "Smita", "03-03-2021");
+//	Library lib4 = new Library("3", "3", "Sand", "04-04-2021");
+//	Library nullBook = new Library("null!", "NULL!", null, null);
 	
-	boolean starterBookAdded = false;
+	public Main() {
+		header.setBackground(Color.pink);
+		library.add(lib);
+//		library.add(lib2);
+//		library.add(lib3);
+//		library.add(lib4);
+//		library.add(nullBook);
+	}
 	
     public void buttonClicked(JButton buttonObj) {
-    	
-    	if (!starterBookAdded) {
-    		library.add(lib);
-    		library.add(lib2);
-    		library.add(lib3);
-    		library.add(lib4);
-    		library.add(nullBook);
-    		header.setBackground(Color.pink);
-    		starterBookAdded = true;
-    	}
     	
     	if (buttonObj == addBook) {
         	AddBook addBookDlg = new AddBook(this, library);
@@ -77,6 +69,8 @@ public class Main extends GBFrame {
             messageBox(labelStr, 550, 350);
     		
     	} else if (buttonObj == printLate) {
+    		PrintLate printLate = new PrintLate(library);
+    		
     		
     	} else if (buttonObj == printBorrowed) {
     		String labelStr = " # | TITLE | BORROWER | DATE BORROWED" + '\n' + '\n';
