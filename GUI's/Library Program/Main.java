@@ -140,7 +140,7 @@ public class Main extends GBFrame {
     			messageBox(lib.getBookCount() + ", books in the library.");
     		}
     	} else if (buttonObj == header) {
-    		messageBox("Created by the one and only, KRISH CHAVAN!", 320, 100);
+    		messageBox("If program is broken - Created by Dhruvan Prakash." + '\n' + '\n' + "If program works correctly - Created by the marvelous, one and only, KRISH CHAVAN!", 600, 150);
     	}
     	
     }
