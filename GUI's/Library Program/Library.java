@@ -9,6 +9,8 @@ public class Library {
 	
 	int booksInLibrary;
 	
+	// Creating a new book
+	
 	public Library(String a, String t, String personBorrowing, String d) {
 		this.bookAuthor = a;
 		this.bookTitle = t;
@@ -18,6 +20,8 @@ public class Library {
 		booksInLibrary++;
 	}
 	
+	
+	// Getting attributes
 	
 	public String getTitle() {
 		return bookTitle;
@@ -33,6 +37,8 @@ public class Library {
 	}
 	
 	
+	// Setting attributes
+	
 	public void setBorrower(String name) {
 		this.borrower = name;
 	}
@@ -41,6 +47,7 @@ public class Library {
 	}
 	
 	
+	// Getting the count of books in the library
 	public int getBookCount() {
 		return booksInLibrary;
 	}
