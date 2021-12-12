@@ -5,6 +5,8 @@ import BreezySwing.*;
 
 public class Extra extends GBDialog {
 
+	// Defining GUI elements
+	
 	JLabel header = addLabel ("Name:", 1,2,1,1);
 	
 	JTextField name = addTextField ("", 2,1,2,1);
@@ -42,6 +44,8 @@ public class Extra extends GBDialog {
     		enterName.setVisible(false);
     	}
 	}
+	
+	// Button click event
 	
 	public void buttonClicked(JButton buttonObj){
 	
