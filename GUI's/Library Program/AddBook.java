@@ -8,7 +8,9 @@ import BreezySwing.*;
 
 public class AddBook extends GBDialog {
 
-	JLabel bookTitleLbl = addLabel ("Title:", 1,1,1,1);
+// Defining GUI elements	
+	
+    JLabel bookTitleLbl = addLabel ("Title:", 1,1,1,1);
     JTextField titleFld = addTextField ("", 1,2,5,1);
     JLabel bookAuthorLbl = addLabel ("Author:", 2,1,1,1);
     JTextField authorFld = addTextField ("", 2,2,5,1);
@@ -27,6 +29,8 @@ public class AddBook extends GBDialog {
 		
         this.library = lib;
     }
+	
+	// Button click event
 	
 	public void buttonClicked(JButton buttonObj){
         
