@@ -5,6 +5,7 @@ import BreezySwing.*;
 
 public class ReturnBook extends GBDialog {
 
+	// Definging GUI elements
 	
 	JLabel nameLbl = addLabel ("Borrower Name:", 1,1,1,1);
 	JTextField name = addTextField ("", 1,2,3,1);
@@ -32,6 +33,8 @@ public class ReturnBook extends GBDialog {
         combo.setVisible(false);
         returnSelect.setVisible(false);
 	}
+	
+	// Button click event
 	
 	public void buttonClicked(JButton buttonObj){
 		
