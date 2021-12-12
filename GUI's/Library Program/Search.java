@@ -5,6 +5,8 @@ import BreezySwing.*;
 
 public class Search extends GBDialog {
 
+	// Defining GUI elements
+	
 	JTextField title = addTextField ("", 1,1,2,1);
 	JButton enter = addButton ("SEARCH", 1,3,1,1);
 	JComboBox<String> combo = addComboBox (2,1,1,1);
@@ -30,6 +32,7 @@ public class Search extends GBDialog {
         noResults.setVisible(false);
 	}
 	
+	// Button click event
 	
 	public void buttonClicked(JButton buttonObj){
 		if (buttonObj == close) {
@@ -60,8 +63,6 @@ public class Search extends GBDialog {
 			}
 			
 		} else if (buttonObj == select) {
-			
-//			System.out.println(combo.getSelectedItem());
 			
 			for (int i=0; i<library.size(); i++) {
 				
