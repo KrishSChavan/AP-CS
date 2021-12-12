@@ -8,15 +8,14 @@ public class CheckOut extends GBDialog {
 	
 	private String dateFormat;
 	
+	// Defining GUI elements
+	
 	JComboBox<String> combo = addComboBox (1,2,1,1);
 	
 	JButton loanSelect = addButton ("LOAN", 2,1,1,1);
 	JButton cancel = addButton ("CLOSE", 2,3,1,1);
 	
 	JLabel blank = addLabel ("", 3,1,1,1);
-	
-//	JLabel nameLbl = addLabel ("Name:", 4,1,1,1);
-//	JTextField name = addTextField ("", 4,2,1,1);
 	
 	JLabel bookBorrowerLbl = addLabel ("Borrower Name:", 4,1,1,1);
   	JTextField borrowerFld = addTextField ("", 4,2,2,1);
@@ -60,13 +59,13 @@ public class CheckOut extends GBDialog {
 	}
 	
 	
-	
+	// Printing an error for the field passed in
 	private void fillFieldErr(String field) {
 		messageBox("Please fill in the " + field + " field.");
 	}
 	
 	
-	
+	// changing the day / month to 2 digits if 1 digit entered.    Ex: 1 entered --> 01
 	public void configureDate(String day, String month, String year, int libraryIndex) {
 		if (day.length() == 1) {
 			day = 0 + day;
@@ -79,16 +78,10 @@ public class CheckOut extends GBDialog {
 		String finalDate = day + "-" + month + "-" + year;
 		
 		((Library) library.get(libraryIndex)).setBorrowDate(finalDate);
-		
-		System.out.println();
-		
-		System.out.println(((Library) library.get(libraryIndex)).getTitle());
-		System.out.println(((Library) library.get(libraryIndex)).getAuthor());
-		System.out.println(((Library) library.get(libraryIndex)).getBorrower());
-		System.out.println(((Library) library.get(libraryIndex)).getBorrowDate());
 	}
 	
 	
+	// Button click event
 	public void buttonClicked(JButton buttonObj){
 		
 		if (buttonObj == loanSelect) {
