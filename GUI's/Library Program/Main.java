@@ -34,6 +34,9 @@ public class Main extends GBFrame {
 	Library lib = new Library("Dr. Seuss", "Cat In The Hat", null, null);
 	
 	public Main() {
+		
+		// Extra GUI styling
+		
 		header.setBackground(Color.pink);
 		header.setForeground(Color.white);
 		header.setFont (new Font ("Verdana", Font.BOLD, 24));
@@ -59,6 +62,8 @@ public class Main extends GBFrame {
 		
 		library.add(lib);
 	}
+	
+	// Button click event
 	
     public void buttonClicked(JButton buttonObj) {
     	
