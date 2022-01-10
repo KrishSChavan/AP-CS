@@ -34,8 +34,8 @@ public class Main extends GBFrame {
 	
 	// Search GUI \/
 	
-	JButton sG = addButton ("Search Grade", 1,1,1,1);
-	JButton sM = addButton ("Search Major", 2,1,1,1);
+	JButton sG = addButton ("Search Grade", 5,1,1,1);
+	JButton sM = addButton ("Search Major", 6,1,1,1);
 	
 	JComboBox<String> combo = addComboBox (2,2,2,2);
 	
@@ -69,8 +69,8 @@ public class Main extends GBFrame {
 //    	s.setVisible(false);
 //    	u.setVisible(false);
 //    	g.setVisible(false);
-		sG.setVisible(false);
-		sM.setVisible(false);
+//		sG.setVisible(false);
+//		sM.setVisible(false);
     	combo.setVisible(false);
     	
     	back.setVisible(false);
@@ -151,6 +151,8 @@ public class Main extends GBFrame {
     	g.setVisible(false);
     	enter.setVisible(true);
     	back.setVisible(true);
+    	sG.setVisible(false);
+    	sM.setVisible(false);
     	
     	type = item;
     	
@@ -234,8 +236,8 @@ public class Main extends GBFrame {
 //    	s.setVisible(false);
 //    	u.setVisible(false);
 //    	g.setVisible(false);
-		sG.setVisible(false);
-		sM.setVisible(false);
+		sG.setVisible(true);
+		sM.setVisible(true);
     	combo.setVisible(false);
     	
     	back.setVisible(false);
@@ -258,9 +260,11 @@ public class Main extends GBFrame {
     
     private void setCombo(String type2) {
     	
+    	for (int i=0; i<obj.length; i++) {
+    		System.out.println((i+1) + " " + obj[i]);
+    	}
+    	
     	if (type2 == "p") {
-    		
-    		System.out.println();
     		
 //    		for (int i=0; i<studentList)
     		
