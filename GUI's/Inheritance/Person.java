@@ -1,28 +1,22 @@
-import java.util.*;
+package inheritance;
 
 import javax.swing.*;
 import BreezySwing.*;
 
-
-public class Person extends GBDialog {
-
-	JLabel nameLbl = addLabel ("Name:", 1,1,1,1);
-	JTextField nameFld = addTextField ("", 1,2,1,1);
+public class Person {
 	
-	JButton okBtn = addButton ("OK", 3,2,2,1);
-    JButton cancelBtn = addButton ("CLOSE", 3,4,2,1);
+	public static String name = "";
 	
-	public Person(JFrame frm) {
-		super(frm);
-		setTitle ("Create Person");
-        setDlgCloseIndicator ("Cancel");
-        setSize (300, 200);
+	public Person(String enteredName) {
+		name = enteredName;
 	}
 	
-	
-	public void buttonClicked(JButton buttonObj){
-		
+	public String getName() {
+		return name;
 	}
 	
+	public String print() {
+		return "Name - " + name;
+	}
 
 }
