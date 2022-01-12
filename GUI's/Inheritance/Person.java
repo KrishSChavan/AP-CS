@@ -5,7 +5,7 @@ import BreezySwing.*;
 
 public class Person {
 	
-	public static String name = "";
+	public String name = "";
 	
 	public Person(String enteredName) {
 		name = enteredName;
