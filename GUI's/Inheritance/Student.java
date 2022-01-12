@@ -2,7 +2,7 @@ package inheritance;
 
 public class Student extends Person {
 
-	private static String id;
+	private String id;
 	private String name;
 	
 	public Student(String enteredName, String enteredId) {
