@@ -1,5 +1,3 @@
-package inheritance;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import BreezySwing.*;
@@ -12,37 +10,64 @@ public class Main extends GBFrame {
 	static JFrame frm;	
 	
 	
-	JButton p = addButton ("Person", 1,1,1,1);
-	JButton s = addButton ("Student", 2,1,1,1);
-	JButton u = addButton ("Undergraduate", 3,1,1,1);
-	JButton g = addButton ("Graduate", 4,1,1,1);
+	JLabel countL = addLabel ("0 People added", 1,1,1,1);
+	
+	JButton p = addButton ("Add Person", 2,1,1,1);
+	JButton s = addButton ("Add Student", 3,1,1,1);
+	JButton u = addButton ("Add Undergraduate", 4,1,1,1);
+	JButton g = addButton ("Add Graduate", 5,1,1,1);
     
-	JLabel nameL = addLabel ("Name:", 1,1,1,1);
-	JTextField nameF = addTextField ("", 1,2,5,1);
+	JLabel nameL = addLabel ("Name:", 2,1,1,1);
+	JTextField nameF = addTextField ("", 2,2,5,1);
 	
-	JLabel idL = addLabel ("Id:", 2,1,1,1);
-	JTextField idF = addTextField ("", 2,2,5,1);
+	JLabel idL = addLabel ("Id:", 3,1,1,1);
+	JTextField idF = addTextField ("", 3,2,5,1);
 	
-	JLabel glvlL = addLabel ("Grade Level:", 3,1,1,1);
-	JTextField glvlF = addTextField ("", 3,2,5,1);
+	JLabel glvlL = addLabel ("Grade Level:", 4,1,1,1);
+	JTextField glvlF = addTextField ("", 4,2,5,1);
 	
-	JLabel mL = addLabel ("Major:", 4,1,1,1);
-	JTextField mF = addTextField ("", 4,2,5,1);
+	JLabel mL = addLabel ("Major:", 5,1,1,1);
+	JTextField mF = addTextField ("", 5,2,5,1);
 	
 	
-	JButton enter = addButton ("DONE", 5,1,1,1);
+	JButton enter = addButton ("DONE", 7,1,1,1);
+	JButton back = addButton("BACK", 7, 2, 1, 1);
 	
 	
 	// Search GUI \/
 	
-	JButton sG = addButton ("Search Grade", 1,1,1,1);
-	JButton sM = addButton ("Search Major", 2,1,1,1);
+	JLabel blank = addLabel(" ", 7,1,3,1);
 	
-	JComboBox<String> combo = addComboBox (2,2,2,2);
+	JButton sG = addButton ("Search Grade", 8,1,1,1);
+	JButton sM = addButton ("Search Major", 9,1,1,1);
+	
+	JLabel searchL = addLabel ("Search ", 2,1,1,1);
+	JTextField search = addTextField ("", 2,2,5,1);
+	JButton searchBtn = addButton ("SEARCH", 6,1,1,1);
+	
+	JComboBox<String> combo = addComboBox (4,1,2,2);
+	
+	JButton view = addButton ("VIEW", 5,1,1,1);
+	
+	
+	// Print GUI \/
+	
+	JLabel blank2 = addLabel (" ", 10,1,1,1);
+	
+	JButton print = addButton ("Print All", 6,1,1,1);
+	
 	
 	ArrayList<JTextField> items = new ArrayList<JTextField>();
+	
+	
+	
+	
 	String type;
 	String type2;
+	
+	Person[] obj = new Person[10];
+	
+	int count = 0;
 	
 	public Main() {
 		
@@ -61,14 +86,15 @@ public class Main extends GBFrame {
 		
 		enter.setVisible(false);
 		
-		
-		
-		p2.setVisible(false);
-    	s2.setVisible(false);
-    	u2.setVisible(false);
-    	g2.setVisible(false);
     	combo.setVisible(false);
-		
+    	searchL.setVisible(false);
+    	search.setVisible(false);
+    	searchBtn.setVisible(false);
+    	
+    	back.setVisible(false);
+    	
+    	print.setVisible(false);	
+    	view.setVisible(false);
 	}
 	
     // Checking for button click
@@ -99,39 +125,121 @@ public class Main extends GBFrame {
     			}
     		}
     		
+    		System.out.println("COUNT is " + count);
+    		
     		if (fieldsFilled == items.size()) {
     			if (type == "p") {
-					Person createPerson = new Person(nameF.getText());
-					
-					System.out.println(createPerson.print());
+    				obj[count] = new Person(nameF.getText());
+					System.out.println("is person " + obj[count].print());
+					System.out.println(count);
 					
 				} else if (type == "s") {
-					Person createStudent = new Student(nameF.getText(), idF.getText());
-					
-					System.out.println(createStudent.print());
+					obj[count] = new Student(nameF.getText(), idF.getText());
+					System.out.println(obj[count].print());
+					System.out.println(count);
 					
 				} else if (type == "u") {
-					Person createUnderGrad = new UnderGrad(nameF.getText(), idF.getText(), glvlF.getText());
-					
-					System.out.println(createUnderGrad.print());
+					obj[count] = new UnderGrad(nameF.getText(), idF.getText(), glvlF.getText());
+					System.out.println(obj[count].print());
+					System.out.println(count);
 					
 				} else if (type == "g") {
-					Person createGrad = new Grad(nameF.getText(), idF.getText(), mF.getText());
-					
-					System.out.println(createGrad.print());
+					obj[count] = new Grad(nameF.getText(), idF.getText(), mF.getText());
+					System.out.println(obj[count].print());
+					System.out.println(count);
 					
 				}
-				
-    			searchDisplay();
     			
-				System.out.println("All fields filled");
+    			countL.setText("People added: " + (count+1));
+    			count++;
+//				System.out.println("All fields filled");
+				backDisplay();
     		}
     		
+    	} else if (buttonObj == back) {
+    		backDisplay();
     	} else if (buttonObj == sG) {
-    		setCombo("grade");
+    		searchDisplay("GRADE");
     	} else if (buttonObj == sM) {
-    		setCombo("major");
+    		searchDisplay("MAJOR");
+    	} else if (buttonObj == searchBtn) {
+    		setCombo(type2);
+    	} else if (buttonObj == print) {
+    		printThis(type);
+    	} else if (buttonObj == view) {
+    		printComboVal(type2);
     	}
+    	
+    }
+    
+    private void printComboVal(String type) {
+    	if (type2 == "GRADE") {
+    		ArrayList<Person> underGradsList = new ArrayList<Person>();
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof UnderGrad) {
+    				underGradsList.add(obj[i]);
+    			}
+    		}
+    		
+    		if (combo.getItemCount() != 0) {
+    			messageBox(underGradsList.get(combo.getSelectedIndex()).print());
+    		} else {
+    			messageBox("Empty");
+    		}
+    		
+    	} else if (type2 == "MAJOR") {
+    		ArrayList<Person> gradsList = new ArrayList<Person>();
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof Grad) {
+    				gradsList.add(obj[i]);
+    			}
+    		}
+    		
+    		if (combo.getItemCount() != 0) {
+    			messageBox(gradsList.get(combo.getSelectedIndex()).print());
+    		} else {
+    			messageBox("Empty");
+    		}
+  
+    	}
+    }
+    
+    private void printThis(String type) {
+    	
+    	String result = "";
+    	int peopleCount = 0;
+    	
+    	if (type == "p") {
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof Person) {
+    				result += (peopleCount+1) + "| " + obj[i].print() + '\n';
+    				peopleCount++;
+    			}
+    		}
+    	} else if (type == "s") {
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof Student) {
+    				result += (peopleCount+1) + "| " + obj[i].print() + '\n';
+    				peopleCount++;
+    			}
+    		}
+    	} else if (type == "u") {
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof UnderGrad) {
+    				result += (peopleCount+1) + "| " + obj[i].print() + '\n';
+    				peopleCount++;
+    			}
+    		}
+    	} else if (type == "g") {
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof Grad) {
+    				result += (peopleCount+1) + "| " + obj[i].print() + '\n';
+    				peopleCount++;
+    			}
+    		}
+    	}
+    	
+    	messageBox(result);
     	
     }
     
@@ -142,8 +250,16 @@ public class Main extends GBFrame {
     	u.setVisible(false);
     	g.setVisible(false);
     	enter.setVisible(true);
+    	back.setVisible(true);
+    	blank.setVisible(false);
+    	sG.setVisible(false);
+    	sM.setVisible(false);
+    	print.setVisible(true);
+    	combo.setVisible(false);
+    	view.setVisible(false);
     	
     	type = item;
+    	items.clear();
     	
     	if (item == "p") {
     		
@@ -196,8 +312,72 @@ public class Main extends GBFrame {
     	}
     	
     }
-
-    private void searchDisplay() {
+    
+    private void backDisplay() {
+    	
+    	print.setVisible(false);
+    	
+    	nameL.setVisible(false);
+		nameF.setVisible(false);
+		nameF.setText("");
+		
+		
+		idL.setVisible(false);
+		idF.setVisible(false);
+		idF.setText("");
+		
+		glvlL.setVisible(false);
+		glvlF.setVisible(false);
+		glvlF.setText("");
+		
+		mL.setVisible(false);
+		mF.setVisible(false);
+		mF.setText("");
+	
+		
+		enter.setVisible(false);
+		back.setVisible(false);
+		
+		
+		sG.setVisible(true);
+		sM.setVisible(true);
+    	combo.setVisible(false);
+    	view.setVisible(false);
+    	searchL.setVisible(false);
+    	search.setVisible(false);
+    	searchBtn.setVisible(false);
+    	
+    	if (count < 10) {
+    		blank.setVisible(true);
+        	p.setVisible(true);
+        	s.setVisible(true);
+        	u.setVisible(true);
+        	g.setVisible(true);
+    	} else{
+    		blank.setVisible(false);
+        	p.setVisible(false);
+        	s.setVisible(false);
+        	u.setVisible(false);
+        	g.setVisible(false);  		    		
+    	}
+    	
+    }
+    
+    private void searchDisplay(String whatSearch) {
+    	
+    	type2 = whatSearch;
+    	
+    	p.setVisible(false);
+    	s.setVisible(false);
+    	u.setVisible(false);
+    	g.setVisible(false);
+    	enter.setVisible(false);
+    	back.setVisible(true);
+    	blank.setVisible(false);
+    	sG.setVisible(false);
+    	sM.setVisible(false);
+    	combo.setVisible(false);
+    	view.setVisible(false);
     	
     	for (int i=0; i<items.size(); i++) {
     		items.get(i).setVisible(false);
@@ -205,51 +385,54 @@ public class Main extends GBFrame {
     	
     	enter.setVisible(false);
     	
-    	
-    	p2.setVisible(true);
-    	s2.setVisible(true);
-    	u2.setVisible(true);
-    	g2.setVisible(true);
+    	searchL.setVisible(true);
+    	searchL.setText("Search " + whatSearch + ":");
+    	search.setVisible(true);
+    	search.setText("");
+    	searchBtn.setVisible(true);
     }
     
-    private void setCombo(String type2) {
+
+	private void setCombo(String here) {
+		
+		combo.removeAllItems();
+		
+//    	for (int i=0; i<count; i++) {
+//    		System.out.println((i+1) + " " + obj[i].print());
+//    	}
     	
-    	if (type2 == "p") {
+		System.out.println(here);
+		System.out.println(search.getText());
+		
+    	if (here == "GRADE") {
     		
-    		for (int i=0; i<)
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof UnderGrad) {
+    				if (((UnderGrad) obj[i]).getGrade().equals(search.getText())) {
+    					combo.addItem(obj[i].getName());
+    				}
+    			}
+    		}
     		
-    	} else if (type2 == "s") {
+    		combo.setVisible(true);
+    		view.setVisible(true);
     		
-    	} else if (type2 == "u") {
+    	} else if (here == "MAJOR") {
     		
-    	} else if (type2 == "g") {
+    		for (int i=0; i<count; i++) {
+    			if (obj[i] instanceof Grad) {
+    				if (((Grad) obj[i]).getGrade().equals(search.getText())) {
+    					combo.addItem(obj[i].getName());
+    				}
+    			}
+    		}
+    		
+    		combo.setVisible(true);
+    		view.setVisible(true);
     		
     	}
     	
     }
-    
-    
-    
-    
-    String MResult = "People with the same Major:" + "\n";
-
-    if(Button == MSearch) {
-                String Comparing = Msearch.getText();
-    System.out.println(Comparing);
-                boolean check = false;
-                for(int i = 0; i < count; i++) {
-    System.out.println(i);
-                    if(studentlist[i] instanceof GraduateStudent) {
-                        String Check = ((GraduateStudent) studentlist[i]).getMajor();
-                        if(Check.equals(Comparing)) {
-                            MResult += studentlist[i].getName() + "\n";
-                        }
-    System.out.println(Check);
-    System.out.println(studentlist[i].getName());
-                    }
-                }
-                messageBox(MResult);
-            } 
     
     
     
@@ -259,7 +442,7 @@ public class Main extends GBFrame {
     
     public static void main(String[] args) {
         frm = new Main();
-        frm.setTitle ("Krish's Library");
+        frm.setTitle ("Krish's Database");
         frm.setSize (400, 250);
         frm.setVisible (true);
     }
