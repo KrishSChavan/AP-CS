@@ -2,7 +2,7 @@ package inheritance;
 
 public class Grad extends Student {
 
-	private static String major;
+	private String major;
     private String name, id;
 
     public Grad(String enteredName, String enteredId, String enteredMajor) {
