@@ -1,3 +1,4 @@
+package inheritance;
 import javax.swing.*;
 import java.util.ArrayList;
 import BreezySwing.*;
