@@ -2,7 +2,7 @@ package inheritance;
 
 public class UnderGrad extends Student {
 	
-	private static String grade;
+	private String grade;
     private String name, id;
 
     public UnderGrad(String enteredName, String enteredId, String enteredGrade) {
