@@ -1,22 +1,19 @@
+package inheritance;
 
 public class Complex {
 
-	public String add(String leftNumbs[], String rightNumbs[]) {
+	public String add(String leftNumb, String rightNumb, String leftNumb2, String rightNumb2) {
 		
 		int leftNum = 0;
 		int rightNum = 0;
 		String result = "";
 		
-		for (int i=0; i<leftNumbs.length; i++) {
-			leftNum += Integer.parseInt(leftNumbs[i]);
-		}
+		leftNum = Integer.parseInt(leftNumb) + Integer.parseInt(leftNumb2);
 		
-		for (int i=0; i<leftNumbs.length; i++) {
-			
-			rightNumbs[i] = rightNumbs[i].substring(rightNumbs[i].length()-1, rightNumbs[i].length());
-			
-			rightNum += Integer.parseInt(rightNumbs[i]);
-		}
+		String newRightNumb = rightNumb.substring(1, rightNumb.length()-1);
+		String newRightNumb2 = rightNumb2.substring(1, rightNumb2.length()-1);
+		
+		rightNum = Integer.parseInt(newRightNumb) + Integer.parseInt(newRightNumb2);
 		
 		if (rightNum < 0) {
 			result = leftNum + " - " + rightNum + "i";
@@ -24,6 +21,8 @@ public class Complex {
 			result = leftNum + " + " + rightNum + "i";
 		}
 		
+		
+		System.out.println("FINAL RESULT: " + result);
 		
 		return result;
 		
