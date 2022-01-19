@@ -1,3 +1,5 @@
+package inheritance;
+
 import javax.swing.*;
 import BreezySwing.*;
 import java.awt.Color;
@@ -30,6 +32,9 @@ public class Main extends GBFrame {
 	int funcCount = 0;
 	String func = funcArr[funcCount]; // add
 	
+	char operandLeft = ' ';
+	char operandRight = ' ';
+	
 	public Main() {
 		
 		label.setForeground(Color.WHITE);
@@ -46,23 +51,58 @@ public class Main extends GBFrame {
     	} else if (buttonObj == enter) {
     		if (checkBlank()) {
     			
-    			parse(left.getText(), left);
-    			parse(right.getText(), right);
+    			if (left.getText().contains("+")) {
+    				operandLeft = '+';
+    			} else if (left.getText().contains("-")) {
+    				operandLeft = '-';
+    			} else if (left.getText().contains("*")) {
+    				operandLeft = '*';
+    			} else if (left.getText().contains("/")) {
+    				operandLeft = '/';
+    			}
     			
-    		/*	System.out.println(left.getText());
-    			System.out.println(right.getText()); */
+    			if (right.getText().contains("+")) {
+    				operandRight = '+';
+    			} else if (right.getText().contains("-")) {
+    				operandRight = '-';
+    			} else if (right.getText().contains("*")) {
+    				operandRight = '*';
+    			} else if (right.getText().contains("/")) {
+    				operandRight = '/';
+    			}
+    			
+    			if (operandLeft == ' ' || operandRight == ' ') {
+    				messageBox("Please enter a full term in both fields");
+    			} else {
+    				
+    				Complex comp = new Complex();
+    				
+    				
+    				messageBox("ANSWER: " + '\n' + comp.add(
+    					parse(left.getText(), left)[0][0],
+    					parse(left.getText(), left)[1][0],
+    					parse(right.getText(), right)[0][0],
+    					parse(right.getText(), right)[1][0]
+    				));
+    				
+    			}
+    			
+    		
     		}
     	}
     	
     }
     
-    public void parse(String str, JTextField field) {
+    public String[][] parse(String str, JTextField field) {
     	
-    	String[] leftNumbers = new String[2];
-    	String[] rightNumbers = new String[2];
+//    	String[] leftNumbers = new String[2];
+//    	String[] rightNumbers = new String[2];
+    	
+    	String[][] numbers = new String[2][2];
+    	
     	int numFoundCount = 0;
     	
-    	str = str.replaceAll("\\s+","");
+    	str = str.replaceAll("\\s+",""); 
     	
     	for (int i=0; i<str.length(); i++) {
     		if (str.charAt(i) == '+' || str.charAt(i) == '-' || str.charAt(i) == '*' || str.charAt(i) == '/') {
@@ -70,8 +110,8 @@ public class Main extends GBFrame {
     				System.out.println(str.substring(0, i).trim());
     				System.out.println(str.substring(i+1, str.length()).trim());
     				
-    				leftNumbers[numFoundCount] = str.substring(0, i).trim();
-    				rightNumbers[numFoundCount] = str.substring(i, str.length()).trim();
+    				numbers[0][numFoundCount] = str.substring(0, i).trim();
+    				numbers[1][numFoundCount] = str.substring(i, str.length()).trim();
     				numFoundCount++;
     				
     			} else if (field == left) {
@@ -82,6 +122,7 @@ public class Main extends GBFrame {
     		}
     	}
     	
+    	return numbers;
     	
     }
   
