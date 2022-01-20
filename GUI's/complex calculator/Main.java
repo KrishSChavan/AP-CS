@@ -78,12 +78,19 @@ public class Main extends GBFrame {
     				Complex comp = new Complex();
     				
     				
-    				messageBox("ANSWER: " + '\n' + comp.add(
-    					parse(left.getText(), left)[0][0],
-    					parse(left.getText(), left)[1][0],
-    					parse(right.getText(), right)[0][0],
-    					parse(right.getText(), right)[1][0]
-    				));
+//    				messageBox("ANSWER: " + '\n' + comp.add(
+//    					parse(left.getText(), left)[0][0],
+//    					parse(left.getText(), left)[1][0],
+//    					parse(right.getText(), right)[0][0],
+//    					parse(right.getText(), right)[1][0]
+//    				));
+    				
+    				messageBox("ANSWER: " + '\n' + comp.subtract(
+        					parse(left.getText(), left)[0][0],
+        					parse(left.getText(), left)[1][0],
+        					parse(right.getText(), right)[0][0],
+        					parse(right.getText(), right)[1][0]
+        				));
     				
     			}
     			
