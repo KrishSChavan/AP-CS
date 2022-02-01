@@ -29,6 +29,7 @@ public class Main extends GBFrame {
 	
 	public void buttonClicked(JButton btn) {
 		if (btn == add) {
+			num.requestFocus();
 			enter(num.getNumber());
 			num.setText("");
 			if (count == 25) {
@@ -69,10 +70,20 @@ public class Main extends GBFrame {
 				result += sorted[i] + ", ";
 			}
 			
-			messageBox(result.substring(0, result.length()-2));
+			messageBox(result.substring(0, result.length()-2) + '\n' + '\n' + "Standard Deviation:" + '\n' + SD());
 		}
 	}
 	
+	public double SD() {
+		
+		double sd = 0.0;
+		
+		for (int i=0; i<count; i++) {
+            sd += Math.pow(nums[i] - mean(), 2);
+        }
+
+        return Math.sqrt(sd/count);
+	}	
 	
 	public String getAllNums() {
 		
@@ -108,13 +119,13 @@ public class Main extends GBFrame {
 	}
 	
 	public double median() {
-		 double result = 1;
+		 double result = 1.0;
          if(count%2 == 1) {
              result = nums[count/2];
          }else {
              double Mid2 = count/2 + 0.5;
              double Mid1 = count/2 - 0.5;
-             result = (nums[(int) Mid1] + nums[(int) Mid2])/2;
+             result = (nums[(int) Mid1] + nums[(int) Mid2])/2.0;
          }
          return result;
 	}
