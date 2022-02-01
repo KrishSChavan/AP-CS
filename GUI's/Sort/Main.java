@@ -30,12 +30,27 @@ public class Main extends GBFrame {
 	public void buttonClicked(JButton btn) {
 		if (btn == add) {
 			num.requestFocus();
-			enter(num.getNumber());
-			num.setText("");
-			if (count == 25) {
-				add.setVisible(false);
-				num.setVisible(false);
+			
+			String numStr = num.getText();
+			boolean goodToGo = true;
+			
+			for (int i=0; i<numStr.length(); i++) {
+				if (Character.isLetter(numStr.charAt(i))) {
+					goodToGo = false;
+					break;
+				}
 			}
+			if (goodToGo) {
+				enter(num.getNumber());
+				num.setText("");
+				if (count == 25) {
+					add.setVisible(false);
+					num.setVisible(false);
+				}
+			} else {
+				messageBox("Please enter a number.");
+			}
+			
 		} else if (btn == mean) {
 			messageBox("The mean" + getAllNums() + " | is, " + mean());
 		} else if (btn == median) {
