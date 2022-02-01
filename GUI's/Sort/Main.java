@@ -1,7 +1,6 @@
+package sorting;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.*;
 import BreezySwing.*;
 
@@ -39,9 +38,9 @@ public class Main extends GBFrame {
 		} else if (btn == mean) {
 			messageBox("The mean" + getAllNums() + " | is, " + mean());
 		} else if (btn == median) {
-			
+			messageBox("The median " + getAllNums() + " | is, " + median());
 		} else if (btn == mode) {
-			
+ 			
 			String modeNums = "[ ";
 			
 			if (mode() != null ) {
@@ -63,15 +62,14 @@ public class Main extends GBFrame {
 			ammt.setText("0 numbers entered");
 		} else if (btn == print) {
 			
-			int toSort[] = new int[count];
+			int sorted[] = SetOrder(count, nums);
+			String result = "Sorted: " + '\n';
 			
-			for (int i=0; i<count; i++) {
-				toSort[i] = nums[i];
+			for (int i=0; i<sorted.length; i++) {
+				result += sorted[i] + ", ";
 			}
 			
-			Arrays.sort(toSort);
-			
-			messageBox(Arrays.toString(toSort));
+			messageBox(result.substring(0, result.length()-2));
 		}
 	}
 	
@@ -109,8 +107,39 @@ public class Main extends GBFrame {
 		return sol;
 	}
 	
-	public void median() {
+	public double median() {
+		 double result = 1;
+         if(count%2 == 1) {
+             result = nums[count/2];
+         }else {
+             double Mid2 = count/2 + 0.5;
+             double Mid1 = count/2 - 0.5;
+             result = (nums[(int) Mid1] + nums[(int) Mid2])/2;
+         }
+         return result;
+	}
+	
+	public int[] SetOrder(int counter, int unsorted []) {
+	
+		int [] Sorted;
+		int [] Unsorted;
 		
+		Sorted = new int [counter];
+	    Unsorted = unsorted;
+	    for(int i = 0; i<counter; i++) {
+	    	int low = Unsorted[i];
+	        for(int x = i+1; x < counter; x++) {
+	        	int compare = Unsorted[x];
+	            if(low > compare) {
+	            	low = compare;
+	                int PH = Unsorted[i];
+	                Unsorted[i] = low;
+	                Unsorted[x] = PH;
+	             }
+	        }
+	        Sorted[i] = low;
+	    }
+	    return Sorted;
 	}
 	
 	public ArrayList<Integer> mode() {
