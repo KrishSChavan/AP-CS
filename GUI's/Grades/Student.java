@@ -39,6 +39,9 @@ public class Student {
 	
 //	Getters
 	
+	public String getName() {
+		return name;
+	}
 	
 	public String getStu() {
 		return name + " " + hwAvg + " " + quizAvg + " " + testAvg + " " + finalAvg;
