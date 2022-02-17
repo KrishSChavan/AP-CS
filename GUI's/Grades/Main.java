@@ -1,6 +1,5 @@
 package sorting;
 import java.awt.Color;
-import java.io.PrintStream;
 
 import javax.swing.*;
 import BreezySwing.*;
@@ -9,7 +8,7 @@ public class Main extends GBFrame {
 
 	static JFrame frm;
 	
-	JButton ammt = addButton("0 students entered", 1,2,1,1);
+	JButton ammt = addButton("0 Students", 1,2,1,1);
 	JTextField nameField = addTextField ("", 2,2,1,1);
 	JButton addName = addButton ("ADD", 3,2,1,1);
 	JButton reset = addButton ("Reset", 3,1,1,1);
@@ -35,6 +34,8 @@ public class Main extends GBFrame {
 		if (btn == addName && !nameField.getText().isBlank()) {
 			nameField.requestFocus();
 			add();
+			Grades grades = new Grades(this, stu[count-1]);
+			grades.setVisible(true);
 		} else if (btn == print) {
 			printAll();
 		} else if (btn == reset) {
@@ -53,13 +54,23 @@ public class Main extends GBFrame {
 		stu[count] = new Student(nameField.getText(), 0, 0, 0, 0);
 		nameField.setText("");
 		count++;
-		ammt.setText(count + " students added");
+		ammt.setText(count + " Students");
 	}
 	
 	public void printAll() {
-		for (int i=0; i<count; i++) {
-			System.out.println(stu[i].getStu() + " i: " + i);
+		
+		String result = "";
+		
+		if (count == 0) {
+			result = "Enter a student first";
+		} else {
+			result = "# | NAME | HW | QUIZ | TEST | FINAL" + '\n' + '\n';
+			for (int i=0; i<count; i++) {
+				result += (i+1) + ") " + stu[i].getStu() + '\n';
+			}
 		}
+		
+		messageBox(result);
 	}
 	
 	public void reset() {
