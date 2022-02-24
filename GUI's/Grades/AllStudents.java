@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class AllStudents {
 
 	Student studentInfo[];
@@ -9,96 +7,75 @@ public class AllStudents {
 		String result = "Please enter a student.";
 		
 		if (cnt > 0) {
-			studentInfo = stu;
+			studentInfo = stu;			
+						
+			Student nArr[] = sortNames(stu, cnt);
+			Student fArr[] = sortFinalAvgs(stu, cnt);
 			
-			String names[] = new String[cnt];
-			double finalAvgs[] = new double[cnt];
+			result = "# | SORTED GRADES | SORTED NAMES" + "\n\n";
 			
-//			for (int i=0; i<cnt; i++) {
-//				names.add(studentInfo[i].getName());
-//				finalAvgs.add(studentInfo[i].getFinal());
-//			}
-			
-			
-			String nArr[] = sortNames(names);
-			int fArr[] = sortFinalAvgs(finalAvgs);
-			
-			result = "# | ALPHABETICAL | NUMERICAL" + "\n\n";
-			
-			for (int i=0; i<nArr.length; i++) {
-				result += (i+1) + ") " + nArr[i] + " - " + getFAvg(nArr[i], cnt) + "  |  " + fArr[i] + " - " +; 
+			for (int i=0; i<cnt; i++) {
+				result += (i+1) + ") " + fArr[i].getName() + " - " + fArr[i].getFinal() + "  |  " + nArr[i].getName() + " - " + nArr[i].getFinal() + '\n'; 
 			}
+			
+			return result;
 			
 		}
 		
 		return result;
 	}
 	
-	public static String[] sortNames(ArrayList<String> names) {
-		
-		String[] array = new String[names.size()];
-		
-		for (int i=0; i<names.size(); i++) {
-			array[i] = names.get(i);
-		}
-	    
-	    // Find the string reference that should go in each cell of
-	    // the array, from cell 0 to the end
-	    for ( int j=0; j < array.length-1; j++ ) {
-	    	// Find min: the index of the string reference that should go into cell j.
-	    	// Look through the unsorted strings (those at j or higher) for the one that is first in lexicographic order
-	    	int min = j;
-	    	for ( int k=j+1; k < array.length; k++ )
-	    		if ( array[k].compareTo( array[min] ) < 0 ) min = k;  
-
-	    	// Swap the reference at j with the reference at min 
-	    	String temp = array[j];
-	    	array[j] = array[min];
-	    	array[min] = temp;
+	
+	
+	public Student[] sortFinalAvgs(Student arr[], int cnt){
+		int n = cnt;
+	 
+	    // One by one move boundary of unsorted subarray
+	    for (int i = 0; i < n-1; i++) {
+	    	// Find the minimum element in unsorted array
+	        int min_idx = i;
+	        for (int j = i+1; j < n; j++){
+	        	if (arr[j].getFinal() < arr[min_idx].getFinal())
+	        		min_idx = j;
+	        }
+	        // Swap the found minimum element with the first element
+	        Student temp = arr[min_idx];
+	        arr[min_idx] = arr[i];
+	        arr[i] = temp;
 	    }
-	  
-	    return array;
 	    
+	    return reverseArr(arr, cnt);
 	}
 	
 	
 	
-	
-	public static int[] sortFinalAvgs(ArrayList<Double> finalAvgs) {  
+	public Student[] sortNames(Student arr[], int cnt) {
+		int n = cnt;
 		
-		int[] array = new int[finalAvgs.size()];
-		
-		for (int i=0; i<finalAvgs.size(); i++) {			
-			array[i] = (int) Math.round(finalAvgs.get(i));
-		}
-		
-		
-	    // Find the integer that should go in each cell of
-	    // the array, from cell 0 to the end
-	    for ( int j=0; j < array.length-1; j++ ) {
-	    	// Find min: the index of the integer that should go into cell j.
-	    	// Look through the unsorted integers (those at j or higher)
-	    	int min = j;
-	    	for ( int k=j+1; k < array.length; k++ )
-	    		if ( array[k] < array[min] ) min = k;  
-
-	    	// Swap the int at j with the int at min 
-	    	int temp = array[j];
-	    	array[j] = array[min];
-	    	array[min] = temp;
+		// One by one move boundary of unsorted subarray
+	    for (int i = 0; i < n-1; i++) {
+	    	// Find the minimum element in unsorted array
+	        int min_idx = i;
+	        for (int j = i+1; j < n; j++){
+	        	if (arr[j].getName().compareTo(arr[min_idx].getName()) < 0)
+	        		min_idx = j;
+	        }
+	        // Swap the found minimum element with the first element
+	        Student temp = arr[min_idx];
+	        arr[min_idx] = arr[i];
+	        arr[i] = temp;
 	    }
 	    
-	    return reverseArr(array);
-	  
+	    return transferArr(arr, cnt);
 	}
 	
 	
 	
-	public static int[] reverseArr(int arr[]) {
-		int[] newArr = new int[arr.length];
-        int j = arr.length;
-        for (int i=0; i<arr.length; i++) {
-            newArr[j - 1] = arr[i];
+	public static Student[] reverseArr(Student sl[], int cnt) {
+		Student[] newArr = new Student[cnt];
+        int j = cnt;
+        for (int i=0; i<cnt; i++) {
+            newArr[j - 1] = sl[i];
             j--;
         }
         
@@ -106,18 +83,14 @@ public class AllStudents {
 	}
 	
 	
-	public int getFAvg(String name, int count) {
+	public Student[] transferArr(Student sl[], int cnt) {
+		Student[] newArr = new Student[cnt];
 		
-		int grade = 0;
-		
-		for (int i=0; i<count; i++) {
-			if (studentInfo[i].getName() == name) {
-				grade = (int) Math.round(studentInfo[i].getFinal());
-			}
+		for (int i=0; i<cnt; i++) {
+			newArr[i] = sl[i];
 		}
 		
-		return grade;
-		
+		return newArr;
 	}
 	
 	
