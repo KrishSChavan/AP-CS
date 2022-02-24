@@ -1,4 +1,3 @@
-package sorting;
 import java.awt.Color;
 
 import javax.swing.*;
@@ -38,6 +37,11 @@ public class Main extends GBFrame {
 			grades.setVisible(true);
 		} else if (btn == print) {
 			printAll();
+			
+			AllStudents as = new AllStudents();
+			
+			as.printSorted(stu, count);
+			
 		} else if (btn == reset) {
 			reset();
 		}
