@@ -1,5 +1,3 @@
-package sorting;
-
 public class Student {
 
 	private String name = "";
@@ -41,6 +39,10 @@ public class Student {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public double getFinal() {
+		return finalAvg;
 	}
 	
 	public String getStu() {
