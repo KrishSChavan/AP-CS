@@ -1,4 +1,3 @@
-package sorting;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -72,6 +71,7 @@ public class Grades extends GBDialog {
 			stu.setTA(calcTA());
 			stu.setHA(calcHA());
 			stu.setQA(calcQA());
+			stu.setFA(calcFA());
 			dispose();
 		}
 		
