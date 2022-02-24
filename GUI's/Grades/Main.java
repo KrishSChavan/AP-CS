@@ -36,11 +36,9 @@ public class Main extends GBFrame {
 			Grades grades = new Grades(this, stu[count-1]);
 			grades.setVisible(true);
 		} else if (btn == print) {
-			printAll();
-			
 			AllStudents as = new AllStudents();
 			
-			as.printSorted(stu, count);
+			messageBox(as.printSorted(stu, count), 600, 250);
 			
 		} else if (btn == reset) {
 			reset();
@@ -59,22 +57,6 @@ public class Main extends GBFrame {
 		nameField.setText("");
 		count++;
 		ammt.setText(count + " Students");
-	}
-	
-	public void printAll() {
-		
-		String result = "";
-		
-		if (count == 0) {
-			result = "Enter a student first";
-		} else {
-			result = "# | NAME | HW | QUIZ | TEST | FINAL" + '\n' + '\n';
-			for (int i=0; i<count; i++) {
-				result += (i+1) + ") " + stu[i].getStu() + '\n';
-			}
-		}
-		
-		messageBox(result);
 	}
 	
 	public void reset() {
