@@ -3,7 +3,7 @@ public class AllStudents {
 	Student studentInfo[];
 		
 	
-	public String printSorted(Student stu[], int cnt) {
+	public String printSorted(Student stu[], int cnt, String type) {
 		String result = "Please enter a student.";
 		
 		if (cnt > 0) {
@@ -12,13 +12,27 @@ public class AllStudents {
 			Student nArr[] = sortNames(stu, cnt);
 			Student fArr[] = sortFinalAvgs(stu, cnt);
 			
-			result = "# | SORTED GRADES | SORTED NAMES" + "\n\n";
-			
-			for (int i=0; i<cnt; i++) {
-				result += (i+1) + ") " + fArr[i].getName() + " - " + fArr[i].getFinal() + "  |  " + nArr[i].getName() + " - " + nArr[i].getFinal() + '\n'; 
+			if (type == "G") {
+				
+				result = "# | SORTED GRADES" + "\n\n";
+				
+				for (int i=0; i<cnt; i++) {
+					result += (i+1) + ") " + fArr[i].getName() + " - " + fArr[i].getFinal() + '\n'; 
+				}
+				
+				return result;
+				
+			} else if (type == "N") {
+				
+				result = "# | SORTED NAMES" + "\n\n";
+				
+				for (int i=0; i<cnt; i++) {
+					result += (i+1) + ") " + nArr[i].getName() + " - " + nArr[i].getFinal() + '\n'; 
+				}
+				
+				return result;
+				
 			}
-			
-			return result;
 			
 		}
 		
