@@ -1,3 +1,5 @@
+package sorting;
+
 import java.awt.Color;
 
 import javax.swing.*;
@@ -16,8 +18,7 @@ public class Main extends GBFrame {
 	JButton print = addButton ("Print", 4,2,1,1);
 	
 	int count = 0;
-//	Person per[] = new Person[1];
-	boolean thereIsSpace = true;
+	Person per[];
 	
 	
 	public Main() {
@@ -40,12 +41,17 @@ public class Main extends GBFrame {
 	
 	
 	public void buttonClicked(JButton btn) {
-		if (btn == add && valid() == "") {
-			Person p = new Person(nameField.getText(), Integer.parseInt(ageField.getText()));
+		if (btn == add) {
+			if (valid() == "") {
+				Person p = new Person(nameField.getText(), Integer.parseInt(ageField.getText()));
+				add(p);
+				System.out.println("Age: " + p.getAge() + " Name: " + p.getName());
+			} else {
+				messageBox(valid());
+			}
 			
-			System.out.println("Age: " + p.getAge() + " Name: " + p.getName());
-		} else {
-			messageBox(valid());
+		} else if (btn == print) {
+			print();
 		}
 	}
 	
@@ -57,6 +63,8 @@ public class Main extends GBFrame {
 		
 		if (nameField.getText().isBlank() || ageField.getText().isBlank()) {
 			go = "Fill all fields";
+		} else if (nameExists(nameField.getText())) {
+			go = "Name already exists.";
 		} else {
 			String txt = ageField.getText();
 			for (int i=0; i<txt.length(); i++) {
@@ -70,7 +78,35 @@ public class Main extends GBFrame {
 		
 		return go;
 	}
+
+	public void add(Person p) {
+		Person[] newArr = new Person[count + 1];
+		for (int i=0; i<count; i++) {
+			newArr[i] = per[i];
+		}
+		newArr[count] = p;
+		per = new Person[count + 1];
+		per = newArr;
+		count++;
+	}
 	
+	public void print() {
+		for (int i=0; i<count; i++) {
+			System.out.println(i+") " + per[i].getName());
+		}
+	}
+
+	public boolean nameExists(String n) {
+		boolean go = false;
+		
+		for(int i=0; i<count; i++) {
+			if (n == per[i].getName()) {
+				System.out.println("same name");
+			}
+		}
+		
+		return go;
+	}
 	
 	
 	public static void main(String[] args) {
