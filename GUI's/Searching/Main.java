@@ -9,13 +9,13 @@ public class Main extends GBFrame {
 
 	static JFrame frm;
 	
-	JButton ammt = addButton("0 People", 1,2,1,1);
+	JButton ammt = addButton("People: 0", 1,2,1,1);
 	JButton nameLbl = addButton("Name:", 2,1,1,1);
 	JButton ageLbl = addButton("Age:", 2,3,1,1);
 	JTextField nameField = addTextField ("", 3,1,1,1);
 	IntegerField ageField = addIntegerField (0, 3,3,1,1);
 	JButton add = addButton ("ADD", 2,2,1,1);
-	JButton print = addButton ("Print", 4,2,1,1);
+	JButton search = addButton ("Search", 4,2,1,1);
 	
 	int count = 0;
 	Person per[];
@@ -36,6 +36,8 @@ public class Main extends GBFrame {
 		ageLbl.setBackground(Color.GRAY);
 		ageLbl.setForeground(Color.WHITE);
 		ageLbl.setBorderPainted(false);
+		
+		nameField.grabFocus();
 	}
 	
 	
@@ -50,8 +52,10 @@ public class Main extends GBFrame {
 				messageBox(valid());
 			}
 			
-		} else if (btn == print) {
+		} else if (btn == search) {
 			print();
+			Search s = new Search(frm, per);
+			s.setVisible(true);
 		}
 	}
 	
@@ -88,6 +92,10 @@ public class Main extends GBFrame {
 		per = new Person[count + 1];
 		per = newArr;
 		count++;
+		ammt.setText("People: " + count);
+		nameField.setText("");
+		ageField.setNumber(0);
+		nameField.grabFocus();
 	}
 	
 	public void print() {
@@ -100,8 +108,9 @@ public class Main extends GBFrame {
 		boolean go = false;
 		
 		for(int i=0; i<count; i++) {
-			if (n == per[i].getName()) {
-				System.out.println("same name");
+			if (n.equals(per[i].getName())) {
+				go = true;
+				return go;
 			}
 		}
 		
