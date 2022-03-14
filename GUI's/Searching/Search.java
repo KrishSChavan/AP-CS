@@ -1,7 +1,5 @@
 package sorting;
 
-import java.awt.Color;
-
 import javax.swing.*;
 import BreezySwing.*;
 
