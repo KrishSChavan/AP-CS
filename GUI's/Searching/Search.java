@@ -1,5 +1,3 @@
-package sorting;
-
 import javax.swing.*;
 import BreezySwing.*;
 
@@ -21,6 +19,8 @@ public class Search extends GBDialog {
 	JButton right = addButton (">", 9,3,1,1);
 	
 	Person[] per;
+	int interval = 0;
+	JButton[] btns = { b1,b2,b3,b4,b5 };
 	
 	public Search(JFrame parent, Person[] people){
 		// The next few lines are part of every dialog
@@ -30,8 +30,61 @@ public class Search extends GBDialog {
         setSize (400, 650);
         
         this.per = people;
+        down(interval);
 	}
 	
+	
+	public void buttonClicked(JButton btn) {
+		if (btn == left) {
+			if ((interval-4) >= 0) {
+				interval -= 4;
+			} else {
+				interval = 0;
+			}
+			down(interval);
+		} else if (btn == right) {
+			if ((interval+4) <= (per.length-1)) {
+				interval += 4;
+			} else {
+				interval = per.length - 1;
+			}
+			up(interval);
+		}
+	}
+	
+	
+	public void down(int i) {
+		for (int j=0; j<btns.length; j++) {
+			btns[j].setText(per[i+j].getName());
+		}
+	}
+	
+	
+	public void up(int i) {
+		
+		System.out.println();
+		System.out.println(i);
+		
+		if ((interval+6) % btns.length == 0) {
+			for (int j=0; j<btns.length; j++) {
+				btns[j].setText(per[i+j].getName());
+			}
+		} else {
+			int remainder = per.length % btns.length;
+			int btnsToShow = (btns.length - remainder) + 1;
+			int btnsToHide = btns.length - btnsToShow;
+			System.out.println();
+			System.out.println("remainder: " + remainder + "   buttons to show: " + btnsToShow);
+			for (int j=0; j<btnsToShow; j++) {
+				if (i+j > per.length-1) down(0);
+				btns[j].setText(per[i+j].getName());
+			}
+			for (int l = btns.length - 1; l >= btnsToShow; l--) {
+				btns[l].setText("");
+			}
+		}
+
+	}
 	
 	
 	
