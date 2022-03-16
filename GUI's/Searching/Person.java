@@ -1,5 +1,3 @@
-package sorting;
-
 public class Person {
 
 	String name;
