@@ -1,5 +1,3 @@
-package sorting;
-
 import java.awt.Color;
 
 import javax.swing.*;
@@ -14,7 +12,7 @@ public class Main extends GBFrame {
 	JButton ageLbl = addButton("Age:", 2,3,1,1);
 	JTextField nameField = addTextField ("", 3,1,1,1);
 	IntegerField ageField = addIntegerField (0, 3,3,1,1);
-	JButton add = addButton ("ADD", 2,2,1,1);
+	JButton add = addButton ("ADD", 3,2,1,1);
 	JButton search = addButton ("Search", 4,2,1,1);
 	
 	int count = 0;
@@ -53,6 +51,11 @@ public class Main extends GBFrame {
 			}
 			
 		} else if (btn == search) {
+			if (count == 0) {
+				messageBox("Enter a person first.");
+				return;
+			}
+				
 			print();
 			Search s = new Search(frm, per);
 			s.setVisible(true);
