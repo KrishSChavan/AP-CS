@@ -9,14 +9,21 @@ public class Search extends GBDialog {
 	
 	JLabel blank = addLabel ("", 3,2,1,1);
 	
-	JButton b1 = addButton ("1", 4,2,1,1);
-	JButton b2 = addButton ("2", 5,2,1,1);
-	JButton b3 = addButton ("3", 6,2,1,1);
-	JButton b4 = addButton ("4", 7,2,1,1);
-	JButton b5 = addButton ("5", 8,2,1,1);
+	GBPanel container = addPanel(  4,2,1,1);
 	
-	JButton left = addButton ("<", 9,1,1,1);
-	JButton right = addButton (">", 9,3,1,1);
+	JButton b1 = container.addButton ("", 4,2,1,1);
+	JButton b2 = container.addButton ("", 5,2,1,1);
+	JButton b3 = container.addButton ("", 6,2,1,1);
+	JButton b4 = container.addButton ("", 7,2,1,1);
+	JButton b5 = container.addButton ("", 8,2,1,1);
+	
+	JButton left = container.addButton ("<", 9,1,1,1);
+	JButton right = container.addButton (">", 9,3,1,1);
+	
+	
+	JButton done = addButton ("DONE", 10,2,1,1);
+	
+	JFrame frm;
 	
 	Person[] per;
 	int interval = 0;
@@ -27,63 +34,92 @@ public class Search extends GBDialog {
         super (parent);                                 // ** REQUIRED **
         setTitle ("Search");
         setDlgCloseIndicator ("Cancel");
-        setSize (400, 650);
+        setSize (450, 650);
         
         this.per = people;
-        down(interval);
+        display(interval);
+        this.frm = parent;
 	}
 	
 	
 	public void buttonClicked(JButton btn) {
+		
+		for (int i=0; i<btns.length; i++) {
+			if (btn == btns[i]) {
+				Edit e = new Edit(frm, btns[i].getText().substring(5), per);
+				e.setVisible(true);
+			}
+		}
+		
 		if (btn == left) {
 			if ((interval-4) >= 0) {
 				interval -= 4;
 			} else {
 				interval = 0;
 			}
-			down(interval);
+			display(interval);
 		} else if (btn == right) {
 			if ((interval+4) <= (per.length-1)) {
 				interval += 4;
 			} else {
 				interval = per.length - 1;
 			}
-			up(interval);
+			display(interval);
+		} else if (btn == done) {
+			dispose();
 		}
 	}
 	
 	
-	public void down(int i) {
-		for (int j=0; j<btns.length; j++) {
-			btns[j].setText(per[i+j].getName());
-		}
-	}
-	
-	
-	public void up(int i) {
+	public void display(int i) {
 		
-		System.out.println();
-		System.out.println(i);
+//		if ((i+5) > per.length-1) {
+//			right.setEnabled(false);
+//		} else if (i == 0) {
+//			left.setEnabled(false);
+//		} else if ((i+5) <= per.length-1) {
+//			right.setEnabled(true);
+//		} else if (i > 0) {
+//			left.setEnabled(true);
+//		}
 		
-		if ((interval+6) % btns.length == 0) {
+		
+		if ((i+5) % btns.length == 0) {
 			for (int j=0; j<btns.length; j++) {
-				btns[j].setText(per[i+j].getName());
+				if ((i+j) >= per.length) {
+					hideBtns(j);
+					return;
+				}
+				btns[j].setText("Edit " + per[i+j].getName());
+				btns[j].setVisible(true);
 			}
 		} else {
 			int remainder = per.length % btns.length;
 			int btnsToShow = (btns.length - remainder) + 1;
 			int btnsToHide = btns.length - btnsToShow;
 			System.out.println();
-			System.out.println("remainder: " + remainder + "   buttons to show: " + btnsToShow);
+			System.out.println("remainder: " + remainder + "   buttons to show: " + (btnsToShow-1) + "   buttons to hide: " + btnsToHide);
+			if (btnsToHide > -1) {
+				for (int l = btns.length - 1; l >= btnsToHide; l--) {
+//					btns[l].setText("");
+					btns[l].setVisible(false);
+				}
+			}
 			for (int j=0; j<btnsToShow; j++) {
-				if (i+j > per.length-1) down(0);
-				btns[j].setText(per[i+j].getName());
+				if ((i+j) >= per.length) return;
+				btns[j].setText("Edit " + per[i+j].getName());
+				btns[j].setVisible(true);
 			}
-			for (int l = btns.length - 1; l >= btnsToShow; l--) {
-				btns[l].setText("");
-			}
+			
 		}
-
+	}
+	
+	
+	
+	public void hideBtns(int j) {
+		for (int i=j; i<btns.length; i++) {
+			btns[i].setVisible(false);
+		}
 	}
 	
 	
