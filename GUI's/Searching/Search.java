@@ -37,6 +37,7 @@ public class Search extends GBDialog {
 	Person[] per;
 	static int cnt;
 	Person p;
+	static int comparisons = 0;
 	
 	@SuppressWarnings("static-access")
 	public Search(JFrame parent, Person[] people, int cnt){
@@ -61,8 +62,10 @@ public class Search extends GBDialog {
 		
 		
 		if (btn == ss) {
+			comparisons = 0;
 			afterSearch(sequentialSearch(per, nameFld.getText()));
 		} else if (btn == bs) {
+			comparisons = 0;
 			afterSearch(binarySearch(per, nameFld.getText()));
 		} else if (btn == done) {
 			dispose();
@@ -95,9 +98,11 @@ public class Search extends GBDialog {
 	        who.setText("Editing " + p.getName());
 	        nameField.setText(p.getName());
 	        ageField.setNumber(p.getAge());
+	        messageBox("Found after, " + comparisons + " comparisons.");
 		} else {
 			foundContainer.setVisible(false);
 	        missingContainer.setVisible(true);
+	        messageBox("Not found after, " + comparisons + " comparisons.");
 		}
 	}
 	
@@ -109,18 +114,20 @@ public class Search extends GBDialog {
             int m = l + (r - l) / 2;
  
             int res = target.compareTo(arr[m].getName());
- 
+            comparisons++;
+            
             // Check if target name is present at mid
-            if (res == 0)
-                return m;
+            if (res == 0) {
+            	return m;
+            }
  
             // If target name greater, ignore left half
-            if (res > 0)
+            if (res > 0) {
                 l = m + 1;
- 
-            // If target name is smaller, ignore right half
-            else
+        	} else {
+        		// If target name is smaller, ignore right half
                 r = m - 1;
+        	}
         }
  
         return -1;
@@ -130,6 +137,8 @@ public class Search extends GBDialog {
 		for (int j = 0; j < arr.length; j++) {
 	       if (arr[j].getName().equals(target)) {
 	         return j;
+	       } else {
+	    	   comparisons++;
 	       }
 	    }
 		return -1;
