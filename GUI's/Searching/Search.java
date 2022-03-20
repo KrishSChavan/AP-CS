@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javax.swing.*;
 import BreezySwing.*;
 
@@ -5,123 +7,206 @@ public class Search extends GBDialog {
 
 	JTextField nameFld = addTextField("[Name Here]", 1,1,3,3);
 	JButton ss = addButton("Sequential Search", 2,1,1,1);
+	JButton printAll = addButton("Print All", 2,2,1,1);
 	JButton bs = addButton("Binary Search", 2,3,1,1);
 	
 	JLabel blank = addLabel ("", 3,2,1,1);
 	
-	GBPanel container = addPanel(  4,2,1,1);
+	GBPanel missingContainer = addPanel(  4,2,1,1);
 	
-	JButton b1 = container.addButton ("", 4,2,1,1);
-	JButton b2 = container.addButton ("", 5,2,1,1);
-	JButton b3 = container.addButton ("", 6,2,1,1);
-	JButton b4 = container.addButton ("", 7,2,1,1);
-	JButton b5 = container.addButton ("", 8,2,1,1);
+	JLabel empty = missingContainer.addLabel("", 1,1,1,1);
+	JButton notFound = missingContainer.addButton("No Person Found.", 1,2,1,1);
+	JLabel empty2 = missingContainer.addLabel("", 1,3,1,1);
 	
-	JButton left = container.addButton ("<", 9,1,1,1);
-	JButton right = container.addButton (">", 9,3,1,1);
+	GBPanel foundContainer = addPanel(  4,2,1,1);
+	
+	JButton who = foundContainer.addButton("", 1,2,1,1);
+	JButton nameLbl = foundContainer.addButton("Edit Name:", 2,1,1,1);
+	JButton ageLbl = foundContainer.addButton("Edit Age:", 2,3,1,1);
+	JTextField nameField = foundContainer.addTextField ("", 3,1,1,1);
+	IntegerField ageField = foundContainer.addIntegerField (0, 3,3,1,1);
+	JButton save = foundContainer.addButton ("SAVE CHANGES", 3,2,1,1);
+	JButton delete = foundContainer.addButton ("DELETE", 4,2,1,1);
 	
 	
 	JButton done = addButton ("DONE", 10,2,1,1);
 	
+	
+	
 	JFrame frm;
-	
 	Person[] per;
-	int interval = 0;
-	JButton[] btns = { b1,b2,b3,b4,b5 };
+	static int cnt;
+	Person p;
 	
-	public Search(JFrame parent, Person[] people){
+	@SuppressWarnings("static-access")
+	public Search(JFrame parent, Person[] people, int cnt){
 		// The next few lines are part of every dialog
         super (parent);                                 // ** REQUIRED **
         setTitle ("Search");
         setDlgCloseIndicator ("Cancel");
-        setSize (450, 650);
+        setSize (900, 650);
         
         this.per = people;
-        display(interval);
         this.frm = parent;
+        this.cnt = cnt;
+        
+        this.foundContainer.setVisible(false);
+        this.missingContainer.setVisible(false);
+        
+        styles();
 	}
 	
 	
 	public void buttonClicked(JButton btn) {
 		
-		for (int i=0; i<btns.length; i++) {
-			if (btn == btns[i]) {
-				Edit e = new Edit(frm, btns[i].getText().substring(5), per);
-				e.setVisible(true);
-			}
-		}
 		
-		if (btn == left) {
-			if ((interval-4) >= 0) {
-				interval -= 4;
-			} else {
-				interval = 0;
-			}
-			display(interval);
-		} else if (btn == right) {
-			if ((interval+4) <= (per.length-1)) {
-				interval += 4;
-			} else {
-				interval = per.length - 1;
-			}
-			display(interval);
+		if (btn == ss) {
+			afterSearch(sequentialSearch(per, nameFld.getText()));
+		} else if (btn == bs) {
+			afterSearch(binarySearch(per, nameFld.getText()));
 		} else if (btn == done) {
 			dispose();
-		}
-	}
-	
-	
-	public void display(int i) {
-		
-//		if ((i+5) > per.length-1) {
-//			right.setEnabled(false);
-//		} else if (i == 0) {
-//			left.setEnabled(false);
-//		} else if ((i+5) <= per.length-1) {
-//			right.setEnabled(true);
-//		} else if (i > 0) {
-//			left.setEnabled(true);
-//		}
-		
-		
-		if ((i+5) % btns.length == 0) {
-			for (int j=0; j<btns.length; j++) {
-				if ((i+j) >= per.length) {
-					hideBtns(j);
+		} else if (btn == delete) {
+			delete(p);
+		} else if (btn == printAll) {
+			printAlpha(sortAlpha(per, cnt));
+		} else if (btn == save) {
+			
+			for (int i=0; i<per.length; i++) {
+				if (per[i].getName().equals(nameField.getText()) && per[i] != p) {
+					messageBox("Name already exists.");
 					return;
 				}
-				btns[j].setText("Edit " + per[i+j].getName());
-				btns[j].setVisible(true);
-			}
-		} else {
-			int remainder = per.length % btns.length;
-			int btnsToShow = (btns.length - remainder) + 1;
-			int btnsToHide = btns.length - btnsToShow;
-			System.out.println();
-			System.out.println("remainder: " + remainder + "   buttons to show: " + (btnsToShow-1) + "   buttons to hide: " + btnsToHide);
-			if (btnsToHide > -1) {
-				for (int l = btns.length - 1; l >= btnsToHide; l--) {
-//					btns[l].setText("");
-					btns[l].setVisible(false);
-				}
-			}
-			for (int j=0; j<btnsToShow; j++) {
-				if ((i+j) >= per.length) return;
-				btns[j].setText("Edit " + per[i+j].getName());
-				btns[j].setVisible(true);
 			}
 			
+			p.setAge(ageField.getNumber());
+			p.setName(nameField.getText());
+			dispose();
+		}
+		
+
+	}
+	
+	public void afterSearch(int index) {
+		if (index > -1) {
+			foundContainer.setVisible(true);
+	        missingContainer.setVisible(false);
+	        p = per[index];
+	        who.setText("Editing " + p.getName());
+	        nameField.setText(p.getName());
+	        ageField.setNumber(p.getAge());
+		} else {
+			foundContainer.setVisible(false);
+	        missingContainer.setVisible(true);
 		}
 	}
 	
+	public static int binarySearch(Person[] arr, String target)
+    {
+		arr = sortAlpha(arr, cnt);
+        int l = 0, r = arr.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+ 
+            int res = target.compareTo(arr[m].getName());
+ 
+            // Check if target name is present at mid
+            if (res == 0)
+                return m;
+ 
+            // If target name greater, ignore left half
+            if (res > 0)
+                l = m + 1;
+ 
+            // If target name is smaller, ignore right half
+            else
+                r = m - 1;
+        }
+ 
+        return -1;
+    }
 	
-	
-	public void hideBtns(int j) {
-		for (int i=j; i<btns.length; i++) {
-			btns[i].setVisible(false);
-		}
+	public static int sequentialSearch(Person[] arr, String target) {
+		for (int j = 0; j < arr.length; j++) {
+	       if (arr[j].getName().equals(target)) {
+	         return j;
+	       }
+	    }
+		return -1;
 	}
 	
 	
+	public void printAlpha(Person arr[]) {
+		String result = "SORTED ALPHABETICALLY - NAME/AGE" + '\n' + '\n';
+		
+		for (int i=0; i<arr.length; i++) {
+			result += (i+1) + ") " + arr[i].getName() + " - " + arr[i].getAge() + '\n';
+		}
+		
+		messageBox(result);
+	}
+	
+	
+	public static Person[] sortAlpha(Person arr[], int cnt) {
+		int n = cnt;
+		
+		// One by one move boundary of unsorted subarray
+	    for (int i = 0; i < n-1; i++) {
+	    	// Find the minimum element in unsorted array
+	        int min_idx = i;
+	        for (int j = i+1; j < n; j++){
+	        	if (arr[j].getName().compareTo(arr[min_idx].getName()) < 0)
+	        		min_idx = j;
+	        }
+	        // Swap the found minimum element with the first element
+	        Person temp = arr[min_idx];
+	        arr[min_idx] = arr[i];
+	        arr[i] = temp;
+	    }
+	    
+	    return arr;
+	}
+	
+	
+	public void delete(Person p) {	
+		int index = 0;
+		for (int i=0; i<per.length; i++) {
+			if (per[i].equals(p)) {
+				index = i;
+				break;
+			}
+		}
+		cnt--;
+		per[index] = per[per.length-1];
+        Person[] newArr = new Person[cnt];
+        for (int i=0; i<cnt; i++) {
+            newArr[i] = per[i];
+        }
+        per = newArr;
+        Main.per = per;
+        Main.count = cnt;
+        dispose();
+	}
+	
+	public void styles() {
+		save.setBackground(Color.GREEN);
+		delete.setBackground(Color.RED);
+		
+		who.setBackground(Color.GRAY);
+		who.setForeground(Color.WHITE);
+		who.setBorderPainted(false);
+		
+		nameLbl.setBackground(Color.GRAY);
+		nameLbl.setForeground(Color.WHITE);
+		nameLbl.setBorderPainted(false);
+		
+		ageLbl.setBackground(Color.GRAY);
+		ageLbl.setForeground(Color.WHITE);
+		ageLbl.setBorderPainted(false);
+		
+		notFound.setBackground(Color.GRAY);
+		notFound.setForeground(Color.WHITE);
+		notFound.setBorderPainted(false);
+	}
 	
 }
