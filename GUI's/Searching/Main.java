@@ -12,14 +12,15 @@ public class Main extends GBFrame {
 	JButton ageLbl = addButton("Age:", 2,3,1,1);
 	JTextField nameField = addTextField ("", 3,1,1,1);
 	IntegerField ageField = addIntegerField (0, 3,3,1,1);
-	JButton add = addButton ("ADD", 3,2,1,1);
-	JButton search = addButton ("Search", 4,2,1,1);
+	JButton add = addButton ("ADD", 4,2,1,1);
+	JButton search = addButton ("Search", 4,1,1,1);
+	JButton printAll = addButton("Print All", 4,3,1,1);
 	
-	int count = 0;
-	Person per[];
+	static int count = 0;
+	static Person per[];
 	
 	
-	public Main() {
+	public Main() {		
 		add.setBackground(Color.pink);
 		add.setForeground(Color.white);
 		
@@ -36,6 +37,10 @@ public class Main extends GBFrame {
 		ageLbl.setBorderPainted(false);
 		
 		nameField.grabFocus();
+	}
+	
+	public void setArr(Person[] arr) {
+		per = arr;
 	}
 	
 	
@@ -57,12 +62,49 @@ public class Main extends GBFrame {
 			}
 				
 			print();
-			Search s = new Search(frm, per);
+			Search s = new Search(frm, per, count);
 			s.setVisible(true);
+		} else if (btn == printAll) {
+			if (count == 0) {
+				messageBox("Enter a person first.");
+				return;
+			}
+			
+			printAlpha(sortAlpha(per, count));
 		}
 	}
 	
 	
+	public void printAlpha(Person arr[]) {
+		String result = "SORTED ALPHABETICALLY - NAME/AGE" + '\n' + '\n';
+		
+		for (int i=0; i<arr.length; i++) {
+			result += (i+1) + ") " + arr[i].getName() + " - " + arr[i].getAge() + '\n';
+		}
+		
+		messageBox(result);
+	}
+	
+	
+	public Person[] sortAlpha(Person arr[], int cnt) {
+		int n = cnt;
+		
+		// One by one move boundary of unsorted subarray
+	    for (int i = 0; i < n-1; i++) {
+	    	// Find the minimum element in unsorted array
+	        int min_idx = i;
+	        for (int j = i+1; j < n; j++){
+	        	if (arr[j].getName().compareTo(arr[min_idx].getName()) < 0)
+	        		min_idx = j;
+	        }
+	        // Swap the found minimum element with the first element
+	        Person temp = arr[min_idx];
+	        arr[min_idx] = arr[i];
+	        arr[i] = temp;
+	    }
+	    
+	    return arr;
+	}
 	
 	public String valid() {
 		
@@ -123,7 +165,7 @@ public class Main extends GBFrame {
 	
 	public static void main(String[] args) {
 		frm = new Main();
-        frm.setTitle ("Krish's Calculator");
+        frm.setTitle ("Krish's Search");
         frm.setSize (400, 250);
         frm.setVisible(true);
 	}
