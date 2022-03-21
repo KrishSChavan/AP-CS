@@ -1,3 +1,5 @@
+package sorting;
+
 import java.awt.Color;
 
 import javax.swing.*;
@@ -37,11 +39,11 @@ public class Main extends GBFrame {
 		ageLbl.setBorderPainted(false);
 		
 		nameField.grabFocus();
+		
+		ammt.setText("People: " + count);
 	}
 	
-	public void setArr(Person[] arr) {
-		per = arr;
-	}
+	
 	
 	
 	
@@ -62,7 +64,7 @@ public class Main extends GBFrame {
 			}
 				
 			print();
-			Search s = new Search(frm, per, count);
+			Search s = new Search(frm, per, count, ammt);
 			s.setVisible(true);
 		} else if (btn == printAll) {
 			if (count == 0) {
