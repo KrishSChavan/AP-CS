@@ -1,3 +1,5 @@
+package sorting;
+
 import java.awt.Color;
 
 import javax.swing.*;
@@ -34,13 +36,14 @@ public class Search extends GBDialog {
 	
 	
 	JFrame frm;
+	JButton ammt;
 	Person[] per;
 	static int cnt;
 	Person p;
 	static int comparisons = 0;
 	
 	@SuppressWarnings("static-access")
-	public Search(JFrame parent, Person[] people, int cnt){
+	public Search(JFrame parent, Person[] people, int cnt, JButton ammt){
 		// The next few lines are part of every dialog
         super (parent);                                 // ** REQUIRED **
         setTitle ("Search");
@@ -49,6 +52,7 @@ public class Search extends GBDialog {
         
         this.per = people;
         this.frm = parent;
+        this.ammt = ammt;
         this.cnt = cnt;
         
         this.foundContainer.setVisible(false);
@@ -194,6 +198,7 @@ public class Search extends GBDialog {
         per = newArr;
         Main.per = per;
         Main.count = cnt;
+        ammt.setText("People: " + cnt);
         dispose();
 	}
 	
