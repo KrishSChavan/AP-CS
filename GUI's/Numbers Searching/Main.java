@@ -15,8 +15,8 @@ public class Main extends GBFrame {
 	JButton search = addButton ("Search", 3,1,1,1);
 	JButton printAll = addButton("Print All", 3,3,1,1);
 	
-	int count = 0;
-	int nums[];
+	static int count = 0;
+	static int nums[];
 	
 	
 	public Main() {		
@@ -43,6 +43,9 @@ public class Main extends GBFrame {
 			} else {
 				messageBox(valid());
 			}
+		} else if (btn == search) {
+			Search s = new Search(frm, nums, count, ammt);
+			s.setVisible(true);
 		}
 	}
 	
