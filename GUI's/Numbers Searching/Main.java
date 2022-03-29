@@ -49,6 +49,18 @@ public class Main extends GBFrame {
 		}
 	}
 	
+	
+	public void printSorted(int arr[]) {
+		String result = "SORTED" + '\n' + '\n';
+		
+		for (int i=0; i<arr.length; i++) {
+			result += (i+1) + ") " + arr[i] + '\n';
+		}
+		
+		messageBox(result);
+	}
+	
+	
 	public String valid() {
 		
 		if (count == 9) {
