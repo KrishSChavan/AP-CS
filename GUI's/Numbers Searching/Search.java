@@ -15,7 +15,7 @@ public class Search extends GBDialog {
 	JButton notFound = missingContainer.addButton("No Number Found.", 1,2,1,1);
 	
 	GBPanel foundContainer = addPanel(  3,2,1,1);
-	JLabel changeField = foundContainer.addLabel ("", 1,2,1,1);
+	JButton changeField = foundContainer.addButton ("", 1,2,1,1);
 	JButton delete = foundContainer.addButton("DELETE", 2,2,1,1);
 	
 	
@@ -28,7 +28,7 @@ public class Search extends GBDialog {
 		super(parent);
 		setTitle ("Search");
         setDlgCloseIndicator ("Cancel");
-        setSize (900, 650);
+        setSize (200, 200);
         
 		this.nums = nums;
 		Search.count = count;
@@ -40,7 +40,7 @@ public class Search extends GBDialog {
 	
 	public void buttonClicked(JButton btn) {
 		if (btn == search) {
-			afterSearch(binarySearch(nums, field.getNumber(), nums[0], nums[nums.length-1]));
+			afterSearch(binarySearch(nums, 0, count-1, field.getNumber()));
 		} else if (btn == delete) {
 			delete(num);
 		}
@@ -48,35 +48,80 @@ public class Search extends GBDialog {
 	
 	
 	public void afterSearch(int n) {
-		if ()
-	}
-	
-	
-	public int binarySearch(int[] arr, int key, int low, int high) {
-		
-		int[] sortedArray = sort(arr);
-		int index = Integer.MAX_VALUE;
-			    
-		while (low <= high) {
-			int mid = low  + ((high - low) / 2);
-			if (sortedArray[mid] < key) {
-				low = mid + 1;
-			} else if (sortedArray[mid] > key) {
-				high = mid - 1;
-			} else if (sortedArray[mid] == key) {
-				index = mid;
-			    break;
-			}
+		if (n > -1) {
+	        foundContainer.setVisible(true);
+	        missingContainer.setVisible(false);
+	        changeField.setText(nums[n] + "");
+		} else {
+			foundContainer.setVisible(false);
+	        missingContainer.setVisible(true);
 		}
-		return index;
 	}
 	
 	
-	public int[] sort(int nums[]) {
-		return nums;
+	public int binarySearch(int [] arr, int low, int high, int num) {
+//		int[] sortedArr = mergeSort(arr, 2); 
+		
+        int mid;
+         if(low > high) {
+             return -1;
+         }else {
+             mid = (low + high)/2;
+             if(arr[mid] < num) {
+                 return binarySearch(arr, mid+1, high, num);
+             }
+             if(arr[mid] > num) {
+                 return binarySearch(arr, low, mid-1, num);
+             }
+         }
+        return mid;
+    }
+	
+	
+	 public static int[] merge(int[] a, int[] l, int[] r, int left, int right) {
+		 int i = 0, j = 0, k = 0;
+		 while (i < left && j < right) {
+			 if (l[i] <= r[j]) {
+				 a[k++] = l[i++];
+			 } else {
+				 a[k++] = r[j++];
+			 }
+		 }
+		 while (i < left) {
+			 a[k++] = l[i++];
+		 }
+		 while (j < right) {
+			 a[k++] = r[j++];
+		 }
+		 
+		 return a;
 	}
+
+	 public static int[] mergeSort(int[] a, int n) {
+		 if (n < 2) {
+			 return a;
+		 }
+		 int mid = n / 2;
+		 int[] l = new int[mid];
+		 int[] r = new int[n - mid];
+
+		 for (int i = 0; i < mid; i++) {
+			 l[i] = a[i];
+		 }
+		 for (int i = mid; i < n; i++) {
+			 r[i - mid] = a[i];
+		 }
+		 mergeSort(l, mid);
+		 mergeSort(r, n - mid);
+
+		 return merge(a, l, r, mid, n - mid);
+	}
+
 	
 	public void delete(int n) {	
+		
+		if (!foundContainer.isVisible()) return;
+		
 		int index = 0;
 		for (int i=0; i<nums.length; i++) {
 			if (nums[i] == n) {
