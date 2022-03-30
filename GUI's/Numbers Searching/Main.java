@@ -46,12 +46,14 @@ public class Main extends GBFrame {
 		} else if (btn == search) {
 			Search s = new Search(frm, nums, count, ammt);
 			s.setVisible(true);
+		} else if (btn == printAll) {
+			print(nums);
 		}
 	}
 	
 	
-	public void printSorted(int arr[]) {
-		String result = "SORTED" + '\n' + '\n';
+	public void print(int arr[]) {
+		String result = "ALL NUMBERS ENTERED" + '\n' + '\n';
 		
 		for (int i=0; i<arr.length; i++) {
 			result += (i+1) + ") " + arr[i] + '\n';
