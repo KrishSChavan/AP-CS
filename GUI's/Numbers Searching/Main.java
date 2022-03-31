@@ -47,7 +47,10 @@ public class Main extends GBFrame {
 			Search s = new Search(frm, nums, count, ammt);
 			s.setVisible(true);
 		} else if (btn == printAll) {
-			if (nums == null) messageBox("Enter a number.");
+			if (nums == null) {
+				messageBox("Enter a number.");
+				return;
+			}
 			print(nums);
 		}
 	}
