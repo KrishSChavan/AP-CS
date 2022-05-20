@@ -24,10 +24,10 @@ public class Coconut : MonoBehaviour
             Destroy(gameObject);
             col.gameObject.GetComponent<Move>().lives -= 1;
             Destroy(hearts[col.gameObject.GetComponent<Move>().lives]);
-            if (col.gameObject.GetComponent<Move>().lives == 0) {
-                Destroy(col.gameObject.GetComponent<Move>());
-                // Destroy(col.gameObject);
-            }
+            // if (col.gameObject.GetComponent<Move>().lives == 0) {
+            //     Destroy(col.gameObject.GetComponent<Move>());
+            //     Destroy(col.gameObject);
+            // }
         } else if (col.gameObject.tag == "Ground" && isCol == false) {
             isCol = true;
             Destroy(gameObject);
