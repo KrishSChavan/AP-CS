@@ -16,9 +16,7 @@ public class Score : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (GameObject.Find("Monkey") != null) {
-            myText.text = monke.GetComponent<Move>().score + "";
-        }
+        myText.text = monke.GetComponent<Move>().score + "";
     }
 
 }
