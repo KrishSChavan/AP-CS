@@ -11,7 +11,7 @@ public class End : MonoBehaviour
     public bool end;
 
     void Start() {
-        monke = GameObject.Find("Monkey");
+        monke = GameObject.Find("Player");
         baseObj = GameObject.Find("Base");
         // endText = gameObject.GetComponent<Text>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -19,7 +19,7 @@ public class End : MonoBehaviour
     }
 
     void Update() {
-        if (GameObject.Find("Monkey") != null) {
+        if (GameObject.Find("Player") != null || end == false) {
             if (monke.GetComponent<Move>().lives == 0) {
                 rb.constraints = RigidbodyConstraints2D.None;
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX;
@@ -29,7 +29,7 @@ public class End : MonoBehaviour
                 baseObj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
                 baseObj.GetComponent<Rigidbody2D>().gravityScale = 1.1f;
 
-                Destroy(monke);
+                monke.SetActive(false);
 
                 end = true;
             }
